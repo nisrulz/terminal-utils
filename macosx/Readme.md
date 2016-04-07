@@ -11,6 +11,7 @@
     killall SystemUIServer
 
     ```
+3. `stop_android_filetransfer_popup.sh` - Stop the autop popup of Android FileTransfer Window when you plug in your device
 
 
 
