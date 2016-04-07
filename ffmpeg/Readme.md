@@ -22,8 +22,11 @@
         ./ffmpeg -i input-file.mp4 -c:v libvpx -crf 10 -b:v 1M -c:a libvorbis output-file.webm
 
         ```
+5. Extract audio from any video file
+    ```bash
+    ./ffmpeg -i "whatever.format" -vn -ac 2 -ar 44100 -ab 320k -f mp3 output.mp3
 
-
+    ```
 
 
 License
