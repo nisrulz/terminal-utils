@@ -49,7 +49,22 @@
         ```bash
         ./adb shell am broadcast -a android.intent.action.BATTERY_LOW
         ```
+8. Permissions
+    1. Granting new permission
+        ```bash
+        ./adb shell pm grant <package_name> <permission_name>
+        ```
+    2. Revoking permission
+        ```bash
+        ./adb shell pm revoke <package_name> <permission_name>
+        ```
 
+
+
+9. Install an apk
+    ```bash
+    ./adb install -g MyAwesomeApp.apk
+    ```
 
 
 License
