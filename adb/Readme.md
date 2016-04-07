@@ -2,8 +2,32 @@
 
 1. Know what alarm has been set, how many times this alarm has been invoked, when are they going to alarmed and interval.
     ```bash
-    adb shell dumpsys alarm | grep 'com.yourpacakage.name'
+    ./adb shell dumpsys alarm | grep 'com.yourpacakage.name'
 
+    ```
+2. Get battery info
+    ```bash
+    ./adb shell dumpsys battery | cat > ~/Documents/myapp-battery.txt
+    ```
+
+3. Get  cpu info
+    ```bash
+    ./adb shell dumpsys cpuinfo | cat > ~/Documents/myapp-cpuinfo.txt
+    ```
+
+4. Get fulldump info
+    ```bash
+    ./adb shell dumpsys | cat > ~/Documents/myapp-fulldump.txt
+    ```
+
+5. Get memory info
+    ```bash
+    ./adb shell dumpsys meminfo 'com.example.myapp'| cat > ~/Documents/myapp-meminfo.txt
+    ```
+
+6. Get wifi info
+    ```bash
+    ./adb shell dumpsys wifi | cat > ~/Documents/myapp-wifi.txt
     ```
 
 
