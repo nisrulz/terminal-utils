@@ -11,6 +11,17 @@
     ./ffmpeg -i input.wav -f mp2 output.mp3
 
     ```
+4. Convert mp4 to webm
+    1. Install ffmpeg with webm suppport
+        ```bash
+        ./ffmpeg -i input.wav -f mp2 output.mp3
+
+        ```
+    2. Convert to webm
+        ```bash
+        ./ffmpeg -i input-file.mp4 -c:v libvpx -crf 10 -b:v 1M -c:a libvorbis output-file.webm
+
+        ```
 
 
 
