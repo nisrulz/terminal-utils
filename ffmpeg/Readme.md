@@ -6,6 +6,12 @@
     ./ffmpeg_gen_sine_tone.sh <frequency>
 
     ```
+3. Convert wav to mp3
+    ```bash
+    ./ffmpeg -i input.wav -f mp2 output.mp3
+
+    ```
+
 
 
 
