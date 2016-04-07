@@ -29,6 +29,26 @@
     ```bash
     ./adb shell dumpsys wifi | cat > ~/Documents/myapp-wifi.txt
     ```
+7. Broadcast intent commands
+    1. Install Referrer
+        ```bash
+        ./adb shell am broadcast -a com.android.vending.INSTALL_REFERRER --es "referrer" "utm_source=testSource&utm_medium=testMedium&utm_term=testTerm&utm_content=testContent&utm_campaign=testCampaign"
+        ```
+
+    2. Bootup
+        ```bash
+        ./adb shell am broadcast -a android.intent.action.BOOT_COMPLETED
+        ```
+
+    3. Battery Low 
+        ```bash
+        ./adb shell am broadcast -a android.intent.action.BATTERY_OKAY
+        ```
+
+    4. Battery Okay
+        ```bash
+        ./adb shell am broadcast -a android.intent.action.BATTERY_LOW
+        ```
 
 
 
