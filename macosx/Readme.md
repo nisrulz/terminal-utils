@@ -5,6 +5,12 @@
     open .
 
     ```
+2. Command to change the destination folder to save your screenshots in mac
+    ```bash
+    defaults write com.apple.screencapture location ~/Pictures/Screenshots
+    killall SystemUIServer
+
+    ```
 
 
 
