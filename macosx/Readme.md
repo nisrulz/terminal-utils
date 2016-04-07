@@ -11,7 +11,7 @@
     killall SystemUIServer
 
     ```
-3. `stop_android_filetransfer_popup.sh` - Stop the autop popup of Android FileTransfer Window when you plug in your device
+3. `stop_android_filetransfer_popup.sh` - Stop the auto popup of Android FileTransfer Window when you plug in your device
 
 4. Get DSA public key of system
     ```bash
