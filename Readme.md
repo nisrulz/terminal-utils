@@ -1,10 +1,14 @@
 # terminal-utils
 
-Bash scripts to automate your life!
+A growing list of useful terminal utility/commands and bash scripts to automate your life!
 
 ![#automateeverything](img_meme1.png)
 
 
+Every folder in the repository consistes of a `Readme` file providing you terminal commands or how to use a terminal utility to automate a certain task, plus the folder also contains any required bash script to run as a whole.
+
+Contributions are always welcome.
+Feedbacks/Issues can be filed under github issues.
 
 License
 =======
