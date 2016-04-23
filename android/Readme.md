@@ -5,6 +5,11 @@
     apk=app.apk count=0 ; for dex in $(unzip -Z1 $apk classes*.dex); do count=$(($count + $(unzip -p $apk $dex | head -c 92 | tail -c 4 | hexdump -e '1/4 "%d\n"'))) ; done ; echo $count
 
     ```
+1. Get verbose information regarding the apk
+    ```bash
+    aapt dump badging myapp.apk 
+
+    ```
 
 
 
