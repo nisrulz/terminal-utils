@@ -6,9 +6,9 @@
     ./ffmpeg_gen_sine_tone.sh <frequency>
 
     ```
-3. Convert wav to mp3
+3. Convert wav to mp3, lossless
     ```bash
-    ./ffmpeg -i input.wav -f mp2 output.mp3
+    ./ffmpeg -i input.wav -codec:a libmp3lame -q:a 0 output.mp3
 
     ```
 4. Convert mp4 to webm
