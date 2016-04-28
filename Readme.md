@@ -26,7 +26,7 @@ A growing list of useful terminal utility/commands and bash scripts to automate 
 + **ffmpeg** - Use ffmpeg like a boss
 	+ Easily create optimised GIFs from a video
 	+ Generate a tone of certain frequency using ffmpeg
-	+ Convert wav to mp3
+	+ Convert wav to mp3, lossless
 	+ Convert mp4 to webm
 	+ Extract audio from any video file
 + **git** - git cheatsheet
@@ -52,6 +52,12 @@ A growing list of useful terminal utility/commands and bash scripts to automate 
 	+ Command to change the destination folder to save your screenshots in mac
 	+ Stop the auto popup of Android FileTransfer Window when you plug in your device
 	+ Get DSA public key of system
+	+ Disable Google Chrome’s Two-Finger Swipe Navigation
+	+ Make your mac os talk
+	+ Make your mac os read(verbally) a text file
+	+ Get External IP
+	+ Get network ip
+	+ Test network connectivity
 + **youtube-dl** - youtube downloader terminal util 
 	+ Extract mp3 audio from Youtube url
 
