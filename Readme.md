@@ -6,7 +6,7 @@ A growing list of useful terminal utility/commands and bash scripts to automate 
 
 ### Table of Contents
 
-+ **adb** - Commands to run basic tasks for android using `adb` tool
++ [**adb**](/adb/) - Commands to run basic tasks for android using `adb` tool
 	+ Know what alarm has been set, how many times this alarm has been invoked, when are they going to alarmed and interval.
 	+ Get battery info
 	+ Get cpu info
@@ -16,20 +16,20 @@ A growing list of useful terminal utility/commands and bash scripts to automate 
 	+ Broadcast intent commands
 	+ Permissions
 	+ Install an apk
-+ **android** - Commands to execute common task for android
++ [**android**](/adb/) - Commands to execute common task for android
 	+ Method count of multidex APK one-liner
 	+ Get verbose information regarding the apk
-+ **batteryhistorian-helper** - Simply using battery historian tool for android
++ [**batteryhistorian-helper**](/batteryhistorian-helper/) - Simply using battery historian tool for android
 	+ Running battery historian
 	+ Extrating bugreport from device
 	+ Reset battery logs
-+ **ffmpeg** - Use ffmpeg like a boss
++ [**ffmpeg**](/ffmpeg/) - Use ffmpeg like a boss
 	+ Easily create optimised GIFs from a video
 	+ Generate a tone of certain frequency using ffmpeg
 	+ Convert wav to mp3, lossless
 	+ Convert mp4 to webm
 	+ Extract audio from any video file
-+ **git** - git cheatsheet
++ [**git**](/git/) - git cheatsheet
 	+ Discard all unstaged files from git
 	+ Log all the commits
 	+ Git status
@@ -47,7 +47,7 @@ A growing list of useful terminal utility/commands and bash scripts to automate 
 	+ GUI Git Tool
 	+ Rewriting History
 	+ Reset merge changes
-+ **macosx** - Using mac osx using your terminal
++ [**macosx**](/macosx/) - Using mac osx using your terminal
 	+ Open finder at place from terminal
 	+ Command to change the destination folder to save your screenshots in mac
 	+ Stop the auto popup of Android FileTransfer Window when you plug in your device
@@ -58,7 +58,7 @@ A growing list of useful terminal utility/commands and bash scripts to automate 
 	+ Get External IP
 	+ Get network ip
 	+ Test network connectivity
-+ **youtube-dl** - youtube downloader terminal util 
++ [**youtube-dl**](/youtube-dl/) - youtube downloader terminal util 
 	+ Extract mp3 audio from Youtube url
 
 
