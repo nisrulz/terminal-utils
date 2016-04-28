@@ -17,30 +17,37 @@
     ```bash
     #More info at : https://help.github.com/articles/generating-ssh-keys/
     cat ~/.ssh/id_dsa.pub
-     ```
+    
+    ```
 1. Disable Google Chrome’s Two-Finger Swipe Navigation
     ```bash
     defaults write com.google.Chrome.plist AppleEnableSwipeNavigateWithScrolls -bool FALSE
+    
     ```
 1. Make your mac os talk
     ```bash
     say "This Mac runs OS X, not OS ex"
+    
     ```
 1. Make your mac os read(verbally) a text file
     ```bash
     say -f /path/to/file.txt
+    
     ```
 1. Get External IP
     ```bash
     curl ipecho.net/plain; echo
+    
     ```
 1. Get network ip
     ```bash
     ipconfig getifaddr en0
+    
     ```
 1. Test network connectivity
     ```bash
     ping -c 10 www.google.com
+    
     ```
 
 
