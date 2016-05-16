@@ -1,4 +1,4 @@
-# terminal-utils
+# terminal-utils [![Twitter](https://img.shields.io/badge/Twitter-@nisrulz-blue.svg?style=flat)](http://twitter.com/nisrulz)
 
 A growing list of useful terminal utility/commands and bash scripts to automate your life!
 
