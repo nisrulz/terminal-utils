@@ -6,101 +6,113 @@
     git checkout -- .
 
     ```
-2. Log all the commits
+1. Log all the commits
     ```bash
     git log --pretty=format:"%h %s" --graph
 
     ```
 
-3. Git status
+1. Git status
     ```bash
     git status
 
     ```
 
-4. Add all changed files to staging area
+1. Add all changed files to staging area
     ```bash
     git add .
 
     ```
 
-5. Commit 
+1. Commit 
     ```bash
     git commit -m "commit msg here"
 
     ```
 
-6. List all remotes
+1. List all remotes
     ```bash
     git remote -v
 
     ```
 
-7. List all existing branches
+1. List all existing branches
     ```bash
     git branch -av
 
     ```
 
-8. Add remote repo to a git
+1. Add remote repo to a git
     ```bash
     git remote add <shortname_of_remote> <remote_url>
 
     ```
 
-9. Git Push
+1. Git Push
     ```bash
     git push <shortname_of_remote> <branch>
 
     ```
 
-10. Git Pull
+1. Git Pull
     ```bash
     git pull <shortname_of_remote> <branch>
 
     ```
 
-11. Delete a local branch
+1. Delete a local branch
     ```bash
     git branch -d the_local_branch
 
     ```
 
-12. Delete a remote branch
+1. Delete a remote branch
     ```bash
     git push origin :the_remote_branch
 
     ```
 
-13. Duplicate a branch
+1. Duplicate a branch
     ```bash
     git checkout -b new_branch old_branch
 
     ```
 
-14. Associate Atom Text Editor with your git
+1. Associate Atom Text Editor with your git
     ```bash
     git config --global core.editor "atom --wait"
 
     ```
 
-15. GUI Git Tool
+1. GUI Git Tool
     ```bash
     gitk --all &
 
     ```
 
-16. Rewriting History
+1. Rewriting History
     ```bash
     git rebase -i <branch/commit_id>
 
     ```
 
-17. Reset merge changes
+1. Reset merge changes
     ```bash
     git reset --merge ORIG_HEAD
 
-    ```
+  	```
+	
+1. Stop tracking a file
+    ```bash
+    git update-index --assume-unchanged [<file> ...]
+
+  	``` 
+	
+1. Start tracking a file
+    ```bash
+   git update-index --no-assume-unchanged [<file> ...]
+
+  	```
 
 
 License
