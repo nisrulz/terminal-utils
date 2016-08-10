@@ -102,13 +102,13 @@
 
   	```
 	
-1. Stop tracking a file
+1. Stop tracking a file [[More Info](http://stackoverflow.com/a/3320183/2745762)]
     ```bash
     git update-index --assume-unchanged [<file> ...]
 
   	``` 
 	
-1. Start tracking a file
+1. Start tracking a file [[More Info](http://stackoverflow.com/a/3320183/2745762)]
     ```bash
    git update-index --no-assume-unchanged [<file> ...]
 
