@@ -67,6 +67,11 @@ Every folder in the repository consistes of a `Readme` file providing you termin
 Contributions are always welcome.
 Feedbacks/Issues can be filed under github issues.
 
+
+> If you found this list helpful or you learned something new today and want to thank me, consider buying me a cup of :coffee:
+>
+> <a href='https://ko-fi.com/A443EQ6' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi1.png?v=f' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
+
 License
 =======
 
