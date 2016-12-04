@@ -30,6 +30,16 @@
 
     ```
 
+1. Amend you last commit
+    ```bash
+    // Stage your new changes first
+    git add .
+
+    // Now commit with a new message that will replace the last commit
+    git commit --amend -m "new commit message"
+
+    ```
+
 1. List all remotes
     ```bash
     git remote -v
