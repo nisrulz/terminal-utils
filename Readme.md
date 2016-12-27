@@ -1,4 +1,8 @@
-# terminal-utils [![Twitter](https://img.shields.io/badge/Twitter-@nisrulz-blue.svg?style=flat)](http://twitter.com/nisrulz)
+# terminal-utils
+
+### Show some :heart:
+[![GitHub stars](https://img.shields.io/github/stars/nisrulz/terminal-utils.svg?style=social&label=Star)](https://github.com/nisrulz/terminal-utils) [![GitHub forks](https://img.shields.io/github/forks/nisrulz/terminal-utils.svg?style=social&label=Fork)](https://github.com/nisrulz/terminal-utils/fork) [![GitHub watchers](https://img.shields.io/github/watchers/nisrulz/terminal-utils.svg?style=social&label=Watch)](https://github.com/nisrulz/terminal-utils) [![GitHub followers](https://img.shields.io/github/followers/nisrulz.svg?style=social&label=Follow)](https://github.com/nisrulz/terminal-utils)  
+[![Twitter Follow](https://img.shields.io/twitter/follow/nisrulz.svg?style=social)](https://twitter.com/nisrulz) 
 
 A growing list of useful terminal utility/commands and bash scripts to automate your life!
 
