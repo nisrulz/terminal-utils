@@ -123,7 +123,11 @@
    git update-index --no-assume-unchanged [<file> ...]
 
   	```
+1. Know which branch a particular commit is on [[More Info](http://stackoverflow.com/a/2707110)]
+    ```bash
+   git branch --contains <commit_id>
 
+    ```
 
 License
 =======
