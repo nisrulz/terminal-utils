@@ -128,6 +128,16 @@
    git branch --contains <commit_id>
 
     ```
+1. View the change history of a file using Git versioning [[More Info](http://stackoverflow.com/a/278242)]
+    ```bash
+    git log -p <filename>
+
+    ```
+    or for visually
+    ```bash
+    gitk <filename>
+
+    ```
 
 License
 =======
