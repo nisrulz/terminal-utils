@@ -138,6 +138,12 @@
     gitk <filename>
 
     ```
+1. Delete last commit [[More Info](http://stackoverflow.com/a/6866485)]
+    ```bash
+   git reset --hard HEAD~1
+
+    ```
+
 
 License
 =======
