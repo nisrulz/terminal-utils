@@ -143,6 +143,11 @@
    git reset --hard HEAD~1
 
     ```
+1. Check history of commits from different branches
+    ```bash
+   git log --oneline --decorate --graph --all
+
+    ```
 
 
 License
