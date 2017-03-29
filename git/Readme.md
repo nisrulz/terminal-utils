@@ -148,6 +148,11 @@
    git log --oneline --decorate --graph --all
 
     ```
+1. Apply changes done in one commit on your working code, without commiting
+    ```bash
+   git cherry-pick -n <HASH>
+
+    ```
 
 
 License
