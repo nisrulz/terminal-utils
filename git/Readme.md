@@ -153,6 +153,11 @@
    git cherry-pick -n <HASH>
 
     ```
+1. Autoccorect git commands 
+    ```bash
+   git config --global help.autocorrect 5
+
+    ```
 
 
 License
