@@ -153,9 +153,9 @@
    git cherry-pick -n <HASH>
 
     ```
-1. Autoccorect git commands 
+1. [Autoccorect git commands](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration)(it iwll wait for 3 seconds before executing the command automatically)
     ```bash
-   git config --global help.autocorrect 5
+   git config --global help.autocorrect 30
 
     ```
 
