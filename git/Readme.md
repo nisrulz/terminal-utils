@@ -123,6 +123,10 @@
     git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
     ```
     > `master` and `dev` are excluded in case they are an ancestor
+1. Checkout to previous branch
+    ```bash
+    git checkout -
+    ```
 
 License
 =======
