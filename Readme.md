@@ -51,6 +51,18 @@ A growing list of useful terminal utility/commands and bash scripts to automate 
 	+ GUI Git Tool
 	+ Rewriting History
 	+ Reset merge changes
+	+ Stop tracking a file
+	+ Start tracking a file 
+	+ Know which branch a particular commit is on 
+	+ View the change history of a file using Git versioning 
+	+ Delete last commit
+	+ Check history of commits from different branches
+    + Apply changes done in one commit on your working code, without committing
+    + Autocorrect git commands
+	+ Squash commits
+	+ Delete all local branches that are already merged into the currently checked out branch
+	+ Checkout to previous branch
+	+ Create a `zip` file of the repository at the current commit
 + [**macosx**](/macosx/) - Using mac osx using your terminal
 	+ Open finder at place from terminal
 	+ Command to change the destination folder to save your screenshots in mac
