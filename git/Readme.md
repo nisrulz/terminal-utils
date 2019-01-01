@@ -105,11 +105,11 @@
     ```bash
     git log --oneline --decorate --graph --all
     ```
-1. Apply changes done in one commit on your working code, without commiting
+1. Apply changes done in one commit on your working code, without committing
     ```bash
     git cherry-pick -n <HASH>
     ```
-1. [Autoccorect git commands](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration)(it iwll wait for 3 seconds before executing the command automatically)
+1. [Autocorrect git commands](https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration)(it iwll wait for 3 seconds before executing the command automatically)
     ```bash
     git config --global help.autocorrect 30
     ```
@@ -133,6 +133,42 @@
     git archive -o git_repo_dir.zip HEAD
     ```
     > Will not include the git folder but also anything that is in the gitignore file will be excluded as well.
+
+
+# git alias
+
+How to setup these aliases
+- Copy-Paste these alias inside your `.bashrc` or `.zshrc`
+- Save.
+- Goto terminal and execute `source ~/.bashrc` or `source ~/.zshrc`.
+- Done, now simply call the alias to execute the command as defined.
+
+```bash
+
+# ------------------ Git ------------------ #
+# git aliases
+alias gitLog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches"
+alias gitAmmend='git commit --amend -m '
+alias gitResetMerge='git reset --merge ORIG_HEAD'
+alias gitDeleteLastCommit='git reset --hard HEAD~1'
+alias gitMergeToMaster='git push && git checkout master && git merge develop && git push && git checkout develop'
+alias gitAddSelective='git add -p'
+alias gitUnstageSelective='git reset -p'
+alias gitUnstageAll='git reset'
+alias gitForgetChanges='git update-index --assume-unchanged'
+alias gitDeleteAllLocalMergedBranches='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
+alias gitInitForAndroid='git init && cp ~/sdks/android_sdk/.gitignore ./.gitignore'
+alias gitZip='function _gitZip(){ result=${PWD##*/};echo "Zipping git repository to: $result.zip"; git archive -o $result.zip HEAD; };_gitZip'
+
+# >> Update From Upstream Cmd 
+# [Breakdown of cmd]
+# git checkout develop = Switch to local develop branch
+# git fetch upstream = Fetch the latest repo info from upstream i.e tags, branches, etc
+# git pull upstream develop = Pull the latest code changes from upstream into the local develop branch
+# git push origin develop = Push the updated local develop branch to orgin repo
+# git checkout - = Switch back to last branch
+alias gitSyncDevelopFromUpstream='git checkout develop && git fetch upstream develop && git pull upstream develop && git push origin develop && git checkout --'
+```
 
 License
 =======
