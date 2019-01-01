@@ -127,7 +127,7 @@
     ```bash
     git checkout -
     ```
-1. Create a `zip` file of the repository at the current commit. [[Read More](https://www.git-scm.com/docs/git-archive/1.6.0)]
+1. Create a `zip` file of the repository at the current commit. [[Read More](https://git-scm.com/docs/git-archive)]
     ```bash
     cd git_repo_dir
     git archive -o git_repo_dir.zip HEAD
