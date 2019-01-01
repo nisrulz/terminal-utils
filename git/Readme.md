@@ -127,6 +127,12 @@
     ```bash
     git checkout -
     ```
+1. Create a `zip` file of the repository at the current commit. [[Read More](https://www.git-scm.com/docs/git-archive/1.6.0)]
+    ```bash
+    cd git_repo_dir
+    git archive -o git_repo_dir.zip HEAD
+    ```
+    > Will not include the git folder but also anything that is in the gitignore file will be excluded as well.
 
 License
 =======
