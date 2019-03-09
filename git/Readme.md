@@ -135,7 +135,7 @@
     > Will not include the git folder but also anything that is in the gitignore file will be excluded as well.
 
 
-# git alias
+# Aliases
 
 How to setup these aliases
 - Copy-Paste these alias inside your `.bashrc` or `.zshrc`
