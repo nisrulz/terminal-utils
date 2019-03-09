@@ -145,7 +145,7 @@ How to setup these aliases
 
 ```bash
 
-# ------------------ Git ------------------ #
+# ------------------ Git ------------------- #
 # git aliases
 alias gitLog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches"
 alias gitAmmend='git commit --amend -m '
@@ -168,6 +168,10 @@ alias gitZip='function _gitZip(){ result=${PWD##*/};echo "Zipping git repository
 # git push origin develop = Push the updated local develop branch to orgin repo
 # git checkout - = Switch back to last branch
 alias gitSyncDevelopFromUpstream='git checkout develop && git fetch upstream develop && git pull upstream develop && git push origin develop && git checkout --'
+
+# Bash Function to squash commits. This acts as an alias.
+# Read more: https://stackoverflow.com/a/7131683/2745762
+gitSquashCommits() { git reset --soft HEAD~"$1";
 ```
 
 License
