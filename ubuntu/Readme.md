@@ -128,7 +128,7 @@ alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
 alias cpuinfo='lscpu'
 
 ```
-# Scripts
+### Scripts
 1. [fix_hibernate_ubuntu](fix_hibernate_ubuntu): Fix hibernation issue in Ubuntu OS
 1. [color_graph](color_graph): Display a nice color bar chart in terminal
 1. [autoscript](autoscript): Automate the bash script creation process via a simple command. 
