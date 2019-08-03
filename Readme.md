@@ -11,81 +11,91 @@ A growing list of useful terminal utility/commands and bash scripts to automate 
 ### Table of Contents
 
 + [**adb**](/adb/) - Commands to run basic tasks for android using `adb` tool
-	+ Know what alarm has been set, how many times this alarm has been invoked, when are they going to alarmed and interval.
-	+ Get battery info
-	+ Get cpu info
-	+ Get fulldump info
-	+ Get memory info
-	+ Get wifi info
-	+ Broadcast intent commands
-	+ Permissions
-	+ Install an apk
+  
+  + Know what alarm has been set, how many times this alarm has been invoked, when are they going to alarmed and interval.
+  + Get battery info
+  + Get CPU info
+  + Get full dump info
+  + Get memory info
+  + Get wifi info
+  + Broadcast intent commands
+  + Permissions
+  + Install an apk
 + [**android**](/adb/) - Commands to execute common task for android
-	+ Method count of multidex APK one-liner
-	+ Get verbose information regarding the apk
+  + Method count of multidex APK one-liner
+  + Get verbose information regarding the apk
 + [**batteryhistorian-helper**](/batteryhistorian-helper/) - Simply using battery historian tool for android
-	+ Running battery historian
-	+ Extrating bugreport from device
-	+ Reset battery logs
+  + Running battery historian
+  + Extrating bugreport from device
+  + Reset battery logs
 + [**ffmpeg**](/ffmpeg/) - Use ffmpeg like a boss
-	+ Easily create optimised GIFs from a video
-	+ Generate a tone of certain frequency using ffmpeg
-	+ Convert wav to mp3, lossless
-	+ Convert mp4 to webm
-	+ Extract audio from any video file
+  + Easily create optimised GIFs from a video
+  + Generate a tone of certain frequency using ffmpeg
+  + Convert wav to mp3, lossless
+  + Convert mp4 to webm
+  + Extract audio from any video file
 + [**git**](/git/) - git cheatsheet
-	+ Discard all unstaged files from git
-	+ Log all the commits
-	+ Git status
-	+ Add all changed files to staging area
-	+ Commit
-	+ List all remotes
-	+ List all existing branches
-	+ Add remote repo to a git
-	+ Git Push
-	+ Git Pull
-	+ Delete a local branch
-	+ Delete a remote branch
-	+ Duplicate a branch
-	+ Associate Atom Text Editor with your git
-	+ GUI Git Tool
-	+ Rewriting History
-	+ Reset merge changes
-	+ Stop tracking a file
-	+ Start tracking a file 
-	+ Know which branch a particular commit is on 
-	+ View the change history of a file using Git versioning 
-	+ Delete last commit
-	+ Check history of commits from different branches
-    + Apply changes done in one commit on your working code, without committing
-    + Autocorrect git commands
-	+ Squash commits
-	+ Delete all local branches that are already merged into the currently checked out branch
-	+ Checkout to previous branch
-	+ Create a `zip` file of the repository at the current commit
-+ [**macosx**](/macosx/) - Using mac osx using your terminal
-	+ Open finder at place from terminal
-	+ Command to change the destination folder to save your screenshots in mac
-	+ Stop the auto popup of Android FileTransfer Window when you plug in your device
-	+ Get DSA public key of system
-	+ Disable Google Chrome’s Two-Finger Swipe Navigation
-	+ Make your mac os talk
-	+ Make your mac os read(verbally) a text file
-	+ Get External IP
-	+ Get network ip
-	+ Test network connectivity
+  + Discard all unstaged files from git
+  + Log all the commits
+  + Git status
+  + Add all changed files to staging area
+  + Commit
+  + List all remotes
+  + List all existing branches
+  + Add the remote repo to a git
+  + Git Push
+  + Git Pull
+  + Delete a local branch
+  + Delete a remote branch
+  + Duplicate a branch
+  + Associate Atom Text Editor with your git
+  + GUI Git Tool
+  + Rewriting History
+  + Reset merge changes
+  + Stop tracking a file
+  + Start tracking a file 
+  + Know which branch a particular commit is on 
+  + View the change history of a file using Git versioning 
+  + Delete the last commit
+  + Check the history of commits from different branches
+  + Apply changes done in one commit on your working code, without committing
+  + Autocorrect git commands
+  + Squash commits
+  + Delete all local branches that are already merged into the currently checked out branch
+  + Checkout to the previous branch
+  + Create a `zip` file of the repository at the current commit
++ [**ubuntu**](/ubuntu/) - Using Ubuntu using your terminal
+  + Open finder at place from terminal
+  + Get External IP
+  + Test network connectivity
+  + Find all sub-directories with name "build"
+  + Change the default location of where screenshots are saved in Ubuntu
+  + Set default terminal to Gnome terminal in Ubuntu
+  + Find out default shell being used in terminal 
+  + Make `zsh` as your default shell in terminal 
+  + Store the output of a command in a variable
++ [**macosx**](/macosx/) - Using macOSX using your terminal
+  + Open finder at place from terminal
+  + Command to change the destination folder to save your screenshots in mac
+  + Stop the auto popup of Android FileTransfer Window when you plug in your device
+  + Get DSA public key of the system
+  + Disable Google Chrome’s Two-Finger Swipe Navigation
+  + Make your mac os talk
+  + Make your mac os read(verbally) a text file
+  + Get External IP
+  + Get network IP
+  + Test network connectivity
 + [**youtube-dl**](/youtube-dl/) - youtube downloader terminal util 
-	+ Extract mp3 audio from Youtube url
+  + Extract mp3 audio from Youtube URL
 
-
-Every folder in the repository consistes of a `Readme` file providing you terminal commands or how to use a terminal utility to automate a certain task, plus the folder also contains any required bash script to run as a whole.
+Every folder in the repository consists of a `Readme` file providing you terminal commands or how to use a terminal utility to automate a certain task, plus the folder also contains any required bash script to run as a whole.
 
 Contributions are always welcome.
-Feedbacks/Issues can be filed under github issues.
+Feedbacks/Issues can be filed under Github issues.
 
 
 > If you found this list helpful or you learned something new today and want to thank me, consider buying me a cup of :coffee:
->  + [PayPal](https://www.paypal.me/nisrulz/5usd)
+> + [PayPal](https://www.paypal.me/nisrulz/5usd)
 
 License
 =======
@@ -96,7 +106,7 @@ License
     you may not use this file except in compliance with the License.
     You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
