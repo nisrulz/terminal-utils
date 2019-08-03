@@ -24,10 +24,30 @@
     ```bash
     gsettings set org.gnome.gnome-screenshot auto-save-directory "file:///home/$USER/Pictures/Screenshots"
     ```
+
 1. Set default terminal to Gnome terminal in Ubuntu
     ```bash
     gsettings set org.gnome.desktop.default-applications.terminal exec gnome-terminal
     ```
+
+1. Find out default shell being used in terminal 
+    ```bash
+    echo $SHELL
+    ```
+1. Make `zsh` as your default shell in terminal 
+    ```bash
+    chsh -s $(which zsh)
+    ```
+
+1. Store the output of a command in a variable
+    ```bash
+    variable_name=$(command [option ...] arg1 arg2 ...)
+    ```
+    > Example:
+    >
+    > To print the current logged in user with headings. execute:
+    >
+    > CURRENT_USER=$(who -H) && echo $CURRENT_USER
 
 # Aliases
 
