@@ -1,4 +1,4 @@
-#macosx
+# macOSX
 
 1. Open finder at place from terminal
     ```bash
@@ -49,8 +49,6 @@
     ping -c 10 www.google.com
     
     ```
-
-
 
 License
 =======

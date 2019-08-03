@@ -135,7 +135,7 @@
     > Will not include the git folder but also anything that is in the gitignore file will be excluded as well.
 
 
-# Aliases
+### Aliases
 
 How to setup these aliases
 - Copy-Paste these alias inside your `.bashrc` or `.zshrc`
@@ -171,7 +171,7 @@ alias gitSyncDevelopFromUpstream='git checkout develop && git fetch upstream dev
 
 # Bash Function to squash commits. This acts as an alias.
 # Read more: https://stackoverflow.com/a/7131683/2745762
-gitSquashCommits() { git reset --soft HEAD~"$1";
+gitSquashCommits() { git reset --soft HEAD~"$1"; }
 ```
 
 License

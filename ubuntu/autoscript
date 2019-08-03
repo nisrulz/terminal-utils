@@ -15,7 +15,13 @@
 # limitations under the License.
 # 
 # -----------------------------------------------------------------------------
-#
+# Preparation:
+# Create a scripts folder under $HOME directory and add it to the path, 
+# so that all scripts inside this folder are avialable in terminal globally.
+# To add the scripts folder to path, add this to your shell rc file i.e .bashrc/.zshrc
+# 
+#   export PATH="$HOME/scripts:$PATH"
+# -----------------------------------------------------------------------------
 # Description:
 # This script is used to automate creation of executable bash script. 
 # Using this script will take care of all steps required to create a 

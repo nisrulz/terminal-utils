@@ -49,7 +49,8 @@
     >
     > CURRENT_USER=$(who -H) && echo $CURRENT_USER
 
-# Aliases
+
+### Aliases
 
 How to setup these aliases
 - Copy-Paste these alias inside your `.bashrc` or `.zshrc`
@@ -69,15 +70,63 @@ alias editGRUB="sudo gedit /etc/default/grub"
 alias updateGRUB="sudo update-grub"
 alias externalIP='curl ipecho.net/plain; echo'
 alias pingNetwork='ping -c 10 www.google.com'
+alias updateAllPackages='sudo apt autoclean && sudo apt autoremove && sudo apt full-upgrade'
 
 # ------------------ Budgie DE ---------------- #
 alias resetBudgiePanelConfig="budgie-panel --reset --replace &!"
 alias restartBudgie="nohup budgie-panel --replace&"
 
+# ------------------ ZSH ------------------ #
+alias zshconfig="code ~/.zshrc"
+alias ohmyzsh="code  ~/.oh-my-zsh"
+
 # ------------------ SSH ------------------ #
-#More info at : https://help.github.com/articles/generating-ssh-keys/
+# More info at : https://help.github.com/articles/generating-ssh-keys/
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 alias getsshkey='cat ~/.ssh/id_rsa.pub'
+
+# ------------------ Misc ------------------ #
+# Get rid of command not found
+alias cd..='cd ../'
+# Quick way to get out of current directory
+alias ..='cd ../'
+alias .='cd ./'
+
+# Make mount command output pretty and human readable format
+alias mount='mount |column -t'
+
+# Print the Path variable value
+alias path='echo -e ${PATH//:/\\n}'
+
+# Print current time/date
+alias now='date "+%c"'
+alias nowtime='date +"%T"'
+alias nowdate='date +"%d-%m-%Y"'
+
+# Play video files in a current directory
+alias playMpg='mplayer *.mpg'
+alias vlc='vlc *.mpg'
+ 
+# Play all music files from the current directory
+alias playmp3='for i in *.mp3; do mplayer "$i"; done'
+ 
+# Shuffle mp3/ogg etc by default
+alias music='mplayer --shuffle *'
+
+# Get system memory, cpu usage, and gpu memory info quickly
+alias meminfo='free -m -l -t'
+ 
+# Get top process eating memory
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+ 
+# Get top process eating CPU
+alias pscpu='ps auxf | sort -nr -k 3'
+alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
+ 
+## Get CPU info
+alias cpuinfo='lscpu'
+
 ```
 # Scripts
 1. [fix_hibernate_ubuntu](fix_hibernate_ubuntu): Fix hibernation issue in Ubuntu OS

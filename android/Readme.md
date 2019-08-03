@@ -11,7 +11,7 @@
     ```
 
 
-# Aliases
+### Aliases
 
 How to setup these aliases
 - Copy-Paste these alias inside your `.bashrc` or `.zshrc`
