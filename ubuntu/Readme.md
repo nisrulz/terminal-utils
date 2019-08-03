@@ -20,6 +20,14 @@
     ```
     > To delete all sub-directories with name "build", replace the command `find ` with `rm -rf` 
 
+1. Change the default location of where screenshots are saved in Ubuntu
+    ```bash
+    gsettings set org.gnome.gnome-screenshot auto-save-directory "file:///home/$USER/Pictures/Screenshots"
+    ```
+1. Set default terminal to Gnome terminal in Ubuntu
+    ```bash
+    gsettings set org.gnome.desktop.default-applications.terminal exec gnome-terminal
+    ```
 
 # Aliases
 
