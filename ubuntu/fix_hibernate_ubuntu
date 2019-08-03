@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+
+# Copyright 2019 Nishant Srivastava
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#    http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# 
+# -----------------------------------------------------------------------------
+# 
+# Problem:
+# Ubuntu has had an issue with having a functional hibernation for sometime.
+# The problem occurs because the system doesnot know where to save the state 
+# during hibernation.
+#
+# Description:
+# This script is used to append UUID of swap partition to the grub file
+# which is used for storing state of system in hibernation mode.
+# 
+# Make it executable first:
+#      chmod +x fix_hibernation_ubuntu
+#
+# Execute as: 
+#      ./fix_hibernation_ubuntu
+
+echo " 🚀 Starting to configure your GRUB file for enabling hibernation..."
+echo " "
+echo "---------------------------------------------------------------------------------------"
+echo " ▶ Step 1"
+echo " » Querying /etc/fstab for 'UUID' and 'swap' to extract the UUID value of swap partition."
+
+# Example result: UUID=7ded0433-24f3-4fcd-0144-59bdd7857a50
+SWAP_UUID=`grep UUID /etc/fstab | grep swap | cut -f1`
+
+echo " » Preparing the new GRUB_CMDLINE_LINUX_DEFAULT_VALUE..."
+GRUB_CMDLINE_LINUX_DEFAULT_VALUE="GRUB_CMDLINE_LINUX_DEFAULT='quiet splash acpi_os_name=Linux acpi_osi= acpi_backlight=vendor resume=$SWAP_UUID'"
+# Replace " with ' 
+FINAL_VALUE=$(echo $GRUB_CMDLINE_LINUX_DEFAULT_VALUE | awk '{gsub( "[:'\'']","\"" ); print}')
+echo " » Value of GRUB_CMDLINE_LINUX_DEFAULT variable with swap uuid appended:"
+echo ""
+echo "   $FINAL_VALUE"
+
+echo "---------------------------------------------------------------------------------------"
+echo " ▶ Step 2"
+echo " » Querying current value of GRUB_CMDLINE_LINUX_DEFAULT inside /etc/default/grub file:"
+echo ""
+echo "   $(cat /etc/default/grub | grep GRUB_CMDLINE_LINUX_DEFAULT)"
+
+echo "---------------------------------------------------------------------------------------"
+echo " ▶ Step 3"
+echo " » Replacing value of GRUB_CMDLINE_LINUX_DEFAULT inside /etc/default/grub file with value prepared earlier:"
+
+read -r -p "   ▶ Are you sure? [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]
+then
+    sudo sed -i "s/.*GRUB_CMDLINE_LINUX_DEFAULT.*/$FINAL_VALUE/" /etc/default/grub
+else
+    exit 1
+fi
+
+echo "---------------------------------------------------------------------------------------"
+echo " ▶ Step 4"
+echo " » Querying value of GRUB_CMDLINE_LINUX_DEFAULT inside /etc/default/grub file after replace:"
+echo ""
+echo "   $(cat /etc/default/grub | grep GRUB_CMDLINE_LINUX_DEFAULT)"
+
+echo "---------------------------------------------------------------------------------------"
+echo " ▶ Step 5"
+echo " » Going to update GRUB."
+
+read -r -p "   ▶ Are you sure? [y/N] " response
+if [[ "$response" =~ ^([yY][eE][sS]|[yY])+$ ]]
+then
+    echo " » Updating grub..."
+    sudo update-grub
+else
+    exit 1
+fi
+echo ""
+echo " 🚩 Done."

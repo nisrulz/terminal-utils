@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+# Copyright 2019 Nishant Srivastava
+# 
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+# 
+#    http://www.apache.org/licenses/LICENSE-2.0
+# 
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# 
+# -----------------------------------------------------------------------------
+#
+# Description:
+# This script is used to automate creation of executable bash script. 
+# Using this script will take care of all steps required to create a 
+# file in the scripts folder, add a header, make it executable by 
+# modifying its permissions, reload the terminal and open the new empty
+# bash script in VSCode editor for modifications.
+# 
+# In case the file already exists, it will open the file in VSCode directly. 
+#
+# Execute as below to create a script named "example_script" inside the scripts 
+# folder: 
+#      ./autoscript example_script
+
+SCRIPT_FOLDER="$HOME/scripts"
+SCRIPT_FILE="$SCRIPT_FOLDER/$1"
+
+if [[ -f $SCRIPT_FILE ]]; then
+  # If script already exists then open it up in code editor
+  code $SCRIPT_FILE
+else
+  # Add the bash script header
+  echo '#!/usr/bin/env bash' > $SCRIPT_FILE
+  # make file executable
+  chmod +x $SCRIPT_FILE
+  # open it up in code editor
+  code $SCRIPT_FILE
+
+  # Determine what (Bourne compatible) shell we are running under. Put the result
+  # in $PROFILE_SHELL (not $SHELL) so further code can depend on the shell type.
+
+  
+  if test -n "$ZSH_VERSION"; then
+    # Since the script is running under bash shell right now, 
+    # Switch to zsh shell
+    zsh
+    # Reload the terminal so the script is available as a command
+    source ~/.zshrc
+  elif test -n "$BASH_VERSION"; then
+    # Since the script is already running under bash shell right now, 
+    # Simply reload the terminal so the script is available as a command
+    source ~/.bashrc
+  elif test -n "$KSH_VERSION"; then
+    # Since the script is running under bash shell right now, 
+    # Switch to zsh shell
+    ksh
+    # Reload the terminal so the script is available as a command
+    source ~/.kshrc
+  else
+    # Since the script is running under bash shell right now, 
+    # Switch to zsh shell
+    sh
+    # Reload the terminal so the script is available as a command
+    source ~/.profile
+  fi
+fi
