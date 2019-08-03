@@ -4,6 +4,8 @@
     ```bash
     nautilus .
     ```
+    > nautilus is the default finder for Ubuntu. Replace with your own if you have another setup.
+
 1. Get External IP
     ```bash
     curl ipecho.net/plain; echo
@@ -12,6 +14,12 @@
     ```bash
     ping -c 10 www.google.com
     ```
+1. Find all sub-directories with name "build"
+    ```bash
+    find **/build/
+    ```
+    > To delete all sub-directories with name "build", replace the command `find ` with `rm -rf` 
+
 
 # Aliases
 
