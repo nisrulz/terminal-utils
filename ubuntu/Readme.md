@@ -49,6 +49,10 @@
     >
     > CURRENT_USER=$(who -H) && echo $CURRENT_USER
 
+1. Iterate over the output of a command and then run another command on each
+    ```bash
+    for f in $(command); do echo $f; done
+    ```
 
 ### Aliases
 
