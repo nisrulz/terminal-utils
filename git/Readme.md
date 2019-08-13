@@ -175,6 +175,7 @@ alias gitSyncDevelopFromUpstream='git checkout develop && git fetch upstream dev
 gitSquashCommits() { git reset --soft HEAD~"$1"; }
 
 # Reset the last git squash command
+# Read more: https://stackoverflow.com/a/2531803/2745762
 alias resetLastGitSquash="git reset 'HEAD@{1}'"
 ```
 

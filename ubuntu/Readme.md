@@ -54,6 +54,11 @@
     for f in $(command); do echo $f; done
     ```
 
+1. Execute in background any command/script by adding `&` after a space
+    ```bash
+    ./myscript &
+    ```
+
 ### Aliases
 
 How to setup these aliases
