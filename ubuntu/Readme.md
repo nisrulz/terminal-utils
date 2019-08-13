@@ -58,7 +58,23 @@
     ```bash
     ./myscript &
     ```
-
+1. Bash alias does not directly accept parameters, however, creating an alias that accepts parameters is as simple as creating a function.
+    
+    To do this, simply create the function which encapsulates all the commands in order, inside the shell's .rc file i.e  `~/.zshrc` or `~/.bashrc`
+    ```bash
+    myFunction(){
+        # You can use parameters $1, $2, $3, etc, 
+        # or just put them all with $@
+        mv "$1" "$1.bak"
+        cp "$2" "$2.bak"
+    }
+    ```
+    Once defined, simply restart your shell by calling `exec zsh`
+    Now call this function as if it was an `alias`, since the defined function is available as a command
+    ```bash
+    $ myFunction original.txt other.txt
+    ```
+    
 ### Aliases
 
 How to setup these aliases
