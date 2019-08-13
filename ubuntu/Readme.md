@@ -72,9 +72,9 @@
     Once defined, simply restart your shell by calling `exec zsh`
     Now call this function as if it was an `alias`, since the defined function is available as a command
     ```bash
-    $ myFunction original.txt other.txt
+    myFunction original.txt other.txt
     ```
-    
+
 ### Aliases
 
 How to setup these aliases
@@ -88,7 +88,6 @@ How to setup these aliases
 alias logout="gnome-session-quit"
 alias shutdown='dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 "org.freedesktop.login1.Manager.PowerOff" boolean:true'
 alias lock="gnome-screensaver-command -l"
-alias resetTerminal="source ~/.zshrc"
 alias hibernate="sudo pm-hibernate"
 alias open="nautilus ./"
 alias editGRUB="sudo gedit /etc/default/grub"
@@ -96,6 +95,12 @@ alias updateGRUB="sudo update-grub"
 alias externalIP='curl ipecho.net/plain; echo'
 alias pingNetwork='ping -c 10 www.google.com'
 alias updateAllPackages='sudo apt autoclean && sudo apt autoremove && sudo apt full-upgrade'
+
+# Reset/Reload your current/default shell 
+alias resetTerminal="exec $(echo $0)"
+
+# Open the default shell's rc file for defining configuration 
+alias shellConfig="code ~/.$(echo $0)rc"
 
 # ------------------ Budgie DE ---------------- #
 alias resetBudgiePanelConfig="budgie-panel --reset --replace &!"
