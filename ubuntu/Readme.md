@@ -74,6 +74,12 @@
     ```bash
     myFunction original.txt other.txt
     ```
+1. Pass output of one command to another i.e. `echo "Hello" | xargs -I{} echo "{} World"`
+    ```bash
+    command1 | xargs -I{} command2 {}
+    ```
+    > Pass output of command1 through xargs using substitution (the braces, `{}`) to command2.
+
 
 ### Aliases
 
