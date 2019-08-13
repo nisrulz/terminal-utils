@@ -170,8 +170,12 @@ alias gitZip='function _gitZip(){ result=${PWD##*/};echo "Zipping git repository
 alias gitSyncDevelopFromUpstream='git checkout develop && git fetch upstream develop && git pull upstream develop && git push origin develop && git checkout --'
 
 # Bash Function to squash commits. This acts as an alias.
+# Call as: gitSquashCommits 3
 # Read more: https://stackoverflow.com/a/7131683/2745762
 gitSquashCommits() { git reset --soft HEAD~"$1"; }
+
+# Reset the last git squash command
+alias resetLastGitSquash="git reset 'HEAD@{1}'"
 ```
 
 License
