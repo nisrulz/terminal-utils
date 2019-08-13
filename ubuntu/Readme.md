@@ -62,7 +62,7 @@
     
     To do this, simply create the function which encapsulates all the commands in order, inside the shell's .rc file i.e  `~/.zshrc` or `~/.bashrc`
     ```bash
-    myFunction(){
+    function myFunction(){
         # You can use parameters $1, $2, $3, etc, 
         # or just put them all with $@
         mv "$1" "$1.bak"
@@ -113,7 +113,7 @@ function open(){
   PASSED_PATH=$1
 
   # Validate the passed path. If it is empty or just '.'
-  # Then  translate to './' for current directory
+  # Then translate to './' for current directory
   
   if [ -z "$PASSED_PATH" ]; then
     # Empty paramter, translate to './'
@@ -124,6 +124,14 @@ function open(){
     # String has only '.', translate to './'
     PASSED_PATH="./"
   fi
+
+  # nohup : Used to but the command in background and detach from current terminal
+  # nautilus: Finder application for Ubuntu
+  #
+  # 1>/dev/null 2>&1 : No output when executing
+  # - `1>/dev/null` redirects standard output (1) to /dev/null, which discards it.
+  # - `2>&1` redirects standard error (2) to standard output (1), 
+  #   which then discards it as well since standard output has already been redirected.
   nohup nautilus "$PASSED_PATH" 1>/dev/null 2>&1 ;
 }
 
