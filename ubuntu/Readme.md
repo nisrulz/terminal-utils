@@ -101,12 +101,31 @@ alias logout="gnome-session-quit"
 alias shutdown='dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 "org.freedesktop.login1.Manager.PowerOff" boolean:true'
 alias lock="gnome-screensaver-command -l"
 alias hibernate="sudo pm-hibernate"
-alias open="nautilus ./"
 alias editGRUB="sudo gedit /etc/default/grub"
 alias updateGRUB="sudo update-grub"
 alias externalIP='curl ipecho.net/plain; echo'
 alias pingNetwork='ping -c 10 www.google.com'
 alias updateAllPackages='sudo apt autoclean && sudo apt autoremove && sudo apt full-upgrade'
+
+# Open function to open the Nautilus Finder GUI from terminal by passing the path
+# Use as: open ./ 
+function open(){
+  PASSED_PATH=$1
+
+  # Validate the passed path. If it is empty or just '.'
+  # Then  translate to './' for current directory
+  
+  if [ -z "$PASSED_PATH" ]; then
+    # Empty paramter, translate to './'
+    PASSED_PATH="./"
+  fi
+
+  if [[ "$PASSED_PATH" == "." ]]; then
+    # String has only '.', translate to './'
+    PASSED_PATH="./"
+  fi
+  nohup nautilus "$PASSED_PATH" 1>/dev/null 2>&1 ;
+}
 
 # Reset/Reload your current/default shell 
 alias resetTerminal="exec $(echo $0)"
@@ -119,8 +138,10 @@ alias resetBudgiePanelConfig="budgie-panel --reset --replace &!"
 alias restartBudgie="nohup budgie-panel --replace&"
 
 # ------------------ ZSH ------------------ #
-alias zshconfig="code ~/.zshrc"
 alias ohmyzsh="code  ~/.oh-my-zsh"
+
+# Enable syntax higlighting in zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # ------------------ SSH ------------------ #
 # More info at : https://help.github.com/articles/generating-ssh-keys/
