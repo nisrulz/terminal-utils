@@ -59,13 +59,91 @@
         ./adb shell pm revoke <package_name> <permission_name>
         ```
 
-
-
 9. Install an apk
     ```bash
     ./adb install -g MyAwesomeApp.apk
     ```
 
+### Aliases
+
+How to setup these aliases
+- Copy-Paste these alias inside your `.bashrc` or `.zshrc`
+- Save.
+- Goto terminal and execute `source ~/.bashrc` or `source ~/.zshrc`.
+- Done, now simply call the alias to execute the command as defined.
+
+```bash
+# ------------------ Android --------------- #
+alias aapt2="$ANDROID_HOME/build-tools/29.0.1/aapt2"
+alias aapt="$ANDROID_HOME/build-tools/29.0.1/aapt"
+
+# Misc ADB aliases
+alias screenshot="adb exec-out screencap -p > screen-$(date -d 'now' "+%s").png"
+alias startintent="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X shell am start $1"
+alias rmapp="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X uninstall $1"
+alias clearapp="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X shell pm clear $1"
+
+# ADB Over Wifi
+# Use as: adbOverWifi
+function adbOverWifi(){
+  local DEVICE_ID=$(adb devices | awk 'NR==2{print $1; exit}')
+  echo "Device ID: $DEVICE_ID"
+
+  local LOCAL_WIFI_IP=$(adb shell ip route | awk 'NR==1{print $9}')
+  echo "Local Wifi IP: $LOCAL_WIFI_IP"
+
+  local PORT=5555
+  adb tcpip $PORT
+  adb connect $LOCAL_WIFI_IP:$PORT
+  sleep 1
+  adb devices;
+}
+
+# ADB Over USB
+# Use as: adbOverUsb
+function adbOverUsb(){
+  local DEVICE_ID=$(adb devices | awk 'NR==2{print $1; exit}')
+  local CONNECTED_OVER_WIFI=$(adb devices | grep 5555 |  awk 'NR==1{print $1}')
+  adb disconnect $CONNECTED_OVER_WIFI
+  echo "Switching to USB mode for device with ID: $DEVICE_ID"
+  adb usb $DEVICE_ID
+  sleep 1
+  adb devices;
+}
+
+# Demo Mode : https://android.googlesource.com/platform/frameworks/base/+/master/packages/SystemUI/docs/demo_mode.md
+# Enable Demo Mode on your device
+# Usage as: enableDemoMode
+alias enableDemoMode="adb shell settings put global sysui_demo_allowed 1 && adb shell am broadcast -a com.android.systemui.demo -e command clock -e hhmm 1200 && adb shell am broadcast -a com.android.systemui.demo -e command network -e mobile show -e level 4 -e datatype false && adb shell am broadcast -a com.android.systemui.demo -e command notifications -e visible false && adb shell am broadcast -a com.android.systemui.demo -e command battery -e plugged false -e level 100"
+
+# Disable Demo Mode on your device
+# Usage: disableDemoMode
+alias disableDemoMode="adb shell am broadcast -a com.android.systemui.demo -e command exit"
+
+# Install and Grant all permissions for an apk
+# Usage: grantAllPermissionsForApk path/to/apk/Application.apk
+alias grantAllPermissionsForApk="adb install -g $1"
+
+# Install APK to device
+# Use as: apkinstall app-debug.apk
+alias apkinstall="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X install -r $1"
+
+# As an alternative to apkinstall, you can also do just ./gradlew installDebug
+# Alias for building and installing the apk to connected device
+# Run at the root of your project
+# Use as: buildAndInstallApk
+alias buildAndInstallApk='./gradlew uninstallAll installDebug'
+
+# Single command to build+install+launch apk
+# 
+# Note: Here I am building, installing and launching the debug apk which is usually in the path: `./app/build/outputs/apk/debug/app-debug.apk` 
+# when this command is executed from the root of the project
+# If you would like to install and run any other apk, simply replace the path for debug apk with path of your own apk
+# 
+# Execute at the root of your android project
+# Use as: buildInstallLaunchDebugApk
+alias buildInstallLaunchDebugApk="buildAndInstallApk && launchDebugApk"
+```
 
 License
 =======
