@@ -73,6 +73,18 @@ How to setup these aliases
 - Done, now simply call the alias to execute the command as defined.
 
 ```bash
+# ------------------ PATH ------------------ #
+# Java
+export JAVA_HOME="$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));')"
+
+# Android SDK (Linux)
+export ANDROID_HOME=$HOME/Android/Sdk
+export NDK=$ANDROID_HOME/ndk-bundle/
+# Path to Android tools (apkanalyzer, avdmanager, monkeyrunner, etc)
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+# Path to Android platform tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
 # ------------------ Android --------------- #
 alias aapt2="$ANDROID_HOME/build-tools/29.0.1/aapt2"
 alias aapt="$ANDROID_HOME/build-tools/29.0.1/aapt"
@@ -111,6 +123,14 @@ function adbOverUsb(){
   adb devices;
 }
 
+# Stress test the debug apk with 100000 ui events
+# Execute at the root of your android project
+# Use as: stressTestDebugApk
+function stressTestApk(){
+  local APP_PACKAGE_NAME=$(apkanalyzer -h manifest application-id ./app/build/outputs/apk/debug/app-debug.apk)
+  adb shell monkey -p $APP_PACKAGE_NAME 100000;
+}
+
 # Demo Mode : https://android.googlesource.com/platform/frameworks/base/+/master/packages/SystemUI/docs/demo_mode.md
 # Enable Demo Mode on your device
 # Usage as: enableDemoMode
@@ -120,6 +140,10 @@ alias enableDemoMode="adb shell settings put global sysui_demo_allowed 1 && adb 
 # Usage: disableDemoMode
 alias disableDemoMode="adb shell am broadcast -a com.android.systemui.demo -e command exit"
 
+# Get package name of the passed apk file
+# Usage: getPackageName app-debug.apk
+alias getPackageName="apkanalyzer -h manifest application-id $1"
+
 # Install and Grant all permissions for an apk
 # Usage: grantAllPermissionsForApk path/to/apk/Application.apk
 alias grantAllPermissionsForApk="adb install -g $1"
@@ -127,6 +151,14 @@ alias grantAllPermissionsForApk="adb install -g $1"
 # Install APK to device
 # Use as: apkinstall app-debug.apk
 alias apkinstall="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X install -r $1"
+
+# Launch your debug apk on your connected device
+# Execute at the root of your android project
+# Usage: launchDebugApk
+function launchDebugApk(){
+  local APP_PACKAGE_NAME=$(apkanalyzer -h manifest application-id ./app/build/outputs/apk/debug/app-debug.apk)
+  adb shell monkey -p $APP_PACKAGE_NAME 1  1>/dev/null 2>&1;
+}
 
 # As an alternative to apkinstall, you can also do just ./gradlew installDebug
 # Alias for building and installing the apk to connected device
