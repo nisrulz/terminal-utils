@@ -2,9 +2,9 @@
 
 1. Open finder at place from terminal
     ```bash
-    nautilus .
+    xdg-open .
     ```
-    > nautilus is the default finder for Ubuntu. Replace with your own if you have another setup.
+    > If the above command doesn't work, then use `nautilus` or `gnome-open` in place of `xdg-open`.
 
 1. Get External IP
     ```bash
