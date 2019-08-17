@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/usr/bin/env bash
+
 # License for any modification to the original (linked below):
 # ----------------------------------------------------------------------------
 # "THE BEER-WARE LICENSE" (Revision 42):

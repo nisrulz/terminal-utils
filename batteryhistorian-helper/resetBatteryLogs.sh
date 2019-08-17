@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Developer : Nishant Srivastava
 # resetBatteryLogs v1.0.0

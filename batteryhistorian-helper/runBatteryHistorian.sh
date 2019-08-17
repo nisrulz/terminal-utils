@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Developer : Nishant Srivastava
 # runBatteryHistorian v1.0.0

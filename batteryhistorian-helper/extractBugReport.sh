@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Developer : Nishant Srivastava
 # extractBugReport v1.0.0

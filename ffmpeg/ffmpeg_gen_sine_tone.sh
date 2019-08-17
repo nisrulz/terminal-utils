@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Generate a tone of specified frequency
 ffmpeg -f lavfi -i "sine=frequency=$1:sample_rate=44100:duration=0.1" -c:a pcm_s16le Tone-$1.wav
