@@ -102,7 +102,37 @@
 
     [[Read more](https://en.wikipedia.org/wiki/Unix_shell)]
 
+1. Check the name of your default os
+    ```bash
+    echo $OSTYPE
+    ```
+    You should get the below values:
+    - `linux-gnu`: GNU Linux
+    - `darwin`: Mac OSX
+    - `cygwin`: POSIX compatibility layer and Linux environment emulation for Windows (Cygwin)
+    - `msys`: Lightweight shell and GNU utilities compiled for Windows (part of MinGW, on Windows for Git Bash/msysGit)
+    - `freebsd`: FreeBSD
 
+    **Bonus**
+
+    If you would like to execute a command based on which OS your shell is running on, use below:
+    ```bash
+    if [[ "$OSTYPE" == "linux-gnu" ]]; then
+        # ...
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        # Mac OSX
+    elif [[ "$OSTYPE" == "cygwin" ]]; then
+        # POSIX compatibility layer and Linux environment emulation for Windows
+    elif [[ "$OSTYPE" == "msys" ]]; then
+        # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
+    elif [[ "$OSTYPE" == "freebsd"* ]]; then
+        #FreeBSD
+    else
+        # Unknown.
+    fi
+    ```
+    Also checkout the [config.guess](https://git.savannah.gnu.org/gitweb/?p=config.git;a=blob;f=config.guess;hb=HEAD) shell script that is more concrete script.
+    
 ### Aliases
 
 How to setup these aliases
