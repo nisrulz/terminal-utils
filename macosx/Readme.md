@@ -49,7 +49,25 @@
     ping -c 10 www.google.com
     
     ```
+### Aliases
 
+How to setup these aliases
+- Copy-Paste these alias inside your `.bashrc` or `.zshrc`
+- Save.
+- Goto terminal and execute `source ~/.bashrc` or `source ~/.zshrc`.
+- Done, now simply call the alias to execute the command as defined.
+
+```bash
+# ------------------ Shell ---------------- #
+# Get default/current shell name
+alias currentShell="echo $0 | cut -d '-' -f 2"
+
+# Reset/Reload your current/default shell 
+alias resetTerminal="exec $(currentShell)"
+
+# Open the default shell's rc file for defining configuration 
+alias shellConfig="code ~/.$(currentShell)rc"
+```
 License
 =======
 
