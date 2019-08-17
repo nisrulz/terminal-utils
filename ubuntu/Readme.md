@@ -153,6 +153,13 @@ alias externalIP='curl ipecho.net/plain; echo'
 alias pingNetwork='ping -c 10 www.google.com'
 alias updateAllPackages='sudo apt autoclean && sudo apt autoremove && sudo apt full-upgrade'
 
+# ------------------ Finder Application ---------------- #
+# When using:
+#     - GNOME, use 'gnome-open'
+#     - Budgie, use 'nautilus'
+#     - any other if you have a different DE and finder application
+alias defaultFinderApplication="nautilus"
+
 # Open function to open the Nautilus Finder GUI from terminal by passing the path
 # Use as: open ./ 
 function open(){
@@ -170,15 +177,23 @@ function open(){
     # String has only '.', translate to './'
     PASSED_PATH="./"
   fi
-
-  # nohup : Used to but the command in background and detach from current terminal
-  # nautilus: Finder application for Ubuntu
-  #
-  # 1>/dev/null 2>&1 : No output when executing
-  # - `1>/dev/null` redirects standard output (1) to /dev/null, which discards it.
-  # - `2>&1` redirects standard error (2) to standard output (1), 
-  #   which then discards it as well since standard output has already been redirected.
-  nohup nautilus "$PASSED_PATH" 1>/dev/null 2>&1 ;
+  
+  
+  if $(xdg-open $PASSED_PATH); then
+    # Default finder application was found and 
+    # the command completed successfully
+  else
+    # Default finder application was NOT found
+    # switch to using user specified finderapplication command
+      # nohup : Used to but the command in background and detach from current terminal
+    # nautilus: Finder application for Ubuntu
+    #
+    # 1>/dev/null 2>&1 : No output when executing
+    # - `1>/dev/null` redirects standard output (1) to /dev/null, which discards it.
+    # - `2>&1` redirects standard error (2) to standard output (1), 
+    #   which then discards it as well since standard output has already been redirected.
+    nohup $(defaultFinderApplication) "$PASSED_PATH" 1>/dev/null 2>&1 ;
+  fi
 }
 
 # Reset/Reload your current/default shell 
