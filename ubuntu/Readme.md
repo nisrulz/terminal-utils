@@ -221,6 +221,29 @@ alias restartBudgie="nohup budgie-panel --replace&"
 export SSH_KEY_PATH="~/.ssh/rsa_id"
 alias getsshkey='cat ~/.ssh/id_rsa.pub'
 
+# ------------------ PATH ------------------ #
+
+# >>>>> Flutter
+FLUTTER_SDK="$HOME/sdks/flutter/bin"
+DART_SDK="/usr/lib/dart/bin"
+# Add all to the path
+export PATH="$PATH:$FLUTTER_SDK:$DART_SDK"
+
+# >>>>> Java
+# Java
+export JAVA_HOME="$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));')"
+
+# >>>>> Android (Linux)
+# Android SDK
+export ANDROID_HOME=$HOME/Android/Sdk
+export NDK=$ANDROID_HOME/ndk-bundle/
+# Path to Android tools (apkanalyzer, avdmanager, monkeyrunner, etc)
+export ANDROID_TOOLS="$ANDROID_HOME/tools/bin"
+# Path to Android platform tools
+export ANDROID_PLATFORM_TOOLS="$ANDROID_HOME/platform-tools"
+# Add all to the path
+export PATH=$PATH:$ANDROID_TOOLS:$ANDROID_PLATFORM_TOOLS
+
 # ------------------ Misc ------------------ #
 # Get rid of command not found
 alias cd..='cd ../'
