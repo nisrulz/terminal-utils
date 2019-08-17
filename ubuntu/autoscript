@@ -48,32 +48,7 @@ else
   chmod +x $SCRIPT_FILE
   # open it up in code editor
   code $SCRIPT_FILE
-
-  # Determine what (Bourne compatible) shell we are running under. Put the result
-  # in $PROFILE_SHELL (not $SHELL) so further code can depend on the shell type.
-
   
-  if test -n "$ZSH_VERSION"; then
-    # Since the script is running under bash shell right now, 
-    # Switch to zsh shell
-    zsh
-    # Reload the terminal so the script is available as a command
-    source ~/.zshrc
-  elif test -n "$BASH_VERSION"; then
-    # Since the script is already running under bash shell right now, 
-    # Simply reload the terminal so the script is available as a command
-    source ~/.bashrc
-  elif test -n "$KSH_VERSION"; then
-    # Since the script is running under bash shell right now, 
-    # Switch to zsh shell
-    ksh
-    # Reload the terminal so the script is available as a command
-    source ~/.kshrc
-  else
-    # Since the script is running under bash shell right now, 
-    # Switch to zsh shell
-    sh
-    # Reload the terminal so the script is available as a command
-    source ~/.profile
-  fi
+  # Reload the shell to pickup the newly added script from the scripts folder
+  exec $(echo $0)
 fi
