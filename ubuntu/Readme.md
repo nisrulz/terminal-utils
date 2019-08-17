@@ -86,6 +86,22 @@
 
     Result: `Hello World`
 
+1. Check name of your default shell
+    ```bash
+    echo $0
+    ```
+    You should get the below values:
+    - `sh`: Bourne shell
+    - `bash`: Bourne-Again shell
+    - `zsh`: Z shell
+    - `ksh`: Korn Shell
+    - `tcsh`: TENEX C shell
+    - `csh`: C shell
+    - `ash`: Almquist shell
+    - `dash`: Debian Almquist shell
+
+    [[Read more](https://en.wikipedia.org/wiki/Unix_shell)]
+
 
 ### Aliases
 
