@@ -196,21 +196,25 @@ function open(){
   fi
 }
 
+# ------------------ Shell ---------------- #
+# Get default/current shell name
+alias currentShell="echo $0"
+
 # Reset/Reload your current/default shell 
-alias resetTerminal="exec $(echo $0)"
+alias resetTerminal="exec $(currentShell)"
 
 # Open the default shell's rc file for defining configuration 
-alias shellConfig="code ~/.$(echo $0)rc"
-
-# ------------------ Budgie DE ---------------- #
-alias resetBudgiePanelConfig="budgie-panel --reset --replace &!"
-alias restartBudgie="nohup budgie-panel --replace&"
+alias shellConfig="code ~/.$(currentShell)rc"
 
 # ------------------ ZSH ------------------ #
 alias ohmyzsh="code  ~/.oh-my-zsh"
 
-# Enable syntax higlighting in zsh
+# Enable syntax highlighting in zsh
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# ------------------ Budgie DE ---------------- #
+alias resetBudgiePanelConfig="budgie-panel --reset --replace &!"
+alias restartBudgie="nohup budgie-panel --replace&"
 
 # ------------------ SSH ------------------ #
 # More info at : https://help.github.com/articles/generating-ssh-keys/
