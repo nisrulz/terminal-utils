@@ -9,6 +9,69 @@
     ```bash
     aapt dump badging myapp.apk 
     ```
+1. Know what alarm has been set, how many times this alarm has been invoked, when are they going to alarmed and interval.
+    ```bash
+    ./adb shell dumpsys alarm | grep 'com.yourpacakage.name'
+
+    ```
+1. Get battery info
+    ```bash
+    ./adb shell dumpsys battery | cat > ~/Documents/myapp-battery.txt
+    ```
+
+1. Get  cpu info
+    ```bash
+    ./adb shell dumpsys cpuinfo | cat > ~/Documents/myapp-cpuinfo.txt
+    ```
+
+1. Get fulldump info
+    ```bash
+    ./adb shell dumpsys | cat > ~/Documents/myapp-fulldump.txt
+    ```
+
+1. Get memory info
+    ```bash
+    ./adb shell dumpsys meminfo 'com.example.myapp'| cat > ~/Documents/myapp-meminfo.txt
+    ```
+
+1. Get wifi info
+    ```bash
+    ./adb shell dumpsys wifi | cat > ~/Documents/myapp-wifi.txt
+    ```
+1. Broadcast intent commands
+    1. Install Referrer
+        ```bash
+        ./adb shell am broadcast -a com.android.vending.INSTALL_REFERRER --es "referrer" "utm_source=testSource&utm_medium=testMedium&utm_term=testTerm&utm_content=testContent&utm_campaign=testCampaign"
+        ```
+
+    1. Bootup
+        ```bash
+        ./adb shell am broadcast -a android.intent.action.BOOT_COMPLETED
+        ```
+
+    1. Battery Low 
+        ```bash
+        ./adb shell am broadcast -a android.intent.action.BATTERY_OKAY
+        ```
+
+    1. Battery Okay
+        ```bash
+        ./adb shell am broadcast -a android.intent.action.BATTERY_LOW
+        ```
+1. Permissions
+    1. Granting new permission
+        ```bash
+        ./adb shell pm grant <package_name> <permission_name>
+        ```
+    1. Revoking permission
+        ```bash
+        ./adb shell pm revoke <package_name> <permission_name>
+        ```
+
+1. Install an apk
+    ```bash
+    ./adb install -g MyAwesomeApp.apk
+    ```
 
 
 ### Aliases
@@ -20,21 +83,68 @@ How to setup these aliases
 - Done, now simply call the alias to execute the command as defined.
 
 ```bash
+# Setup ANDROID_HOME
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    # Linux
+    export ANDROID_HOME=$HOME/Android/Sdk
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    # Mac OSX
+    export ANDROID_HOME=$HOME/sdks/android_sdk
+fi
+
+export NDK=$ANDROID_HOME/ndk-bundle/
+# Path to Android tools (apkanalyzer, avdmanager, monkeyrunner, etc)
+export ANDROID_TOOLS="$ANDROID_HOME/tools/bin"
+# Path to Android platform tools
+export ANDROID_PLATFORM_TOOLS="$ANDROID_HOME/platform-tools"
+# Add all to the path
+export PATH="$ANDROID_TOOLS:$ANDROID_PLATFORM_TOOLS:$PATH"
 
 # ------------------ Android --------------- #
-alias aapt2="$ANDROID_HOME/build-tools/28.0.3/aapt2"
+alias aapt2="$ANDROID_HOME/build-tools/29.0.1/aapt2"
+alias aapt="$ANDROID_HOME/build-tools/29.0.1/aapt"
 
 # Misc ADB aliases
-alias screenshot="adb exec-out screencap -p > screen-$(date -d 'now' "+%s").png"
+alias screenshot="adb exec-out screencap -p > screen-$(nowdate).png"
 alias startintent="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X shell am start $1"
 alias rmapp="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X uninstall $1"
 alias clearapp="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X shell pm clear $1"
 
+# ADB Over Wifi
+# Use as: adbOverWifi
+function adbOverWifi(){
+  local DEVICE_ID=$(adb devices | awk 'NR==2{print $1; exit}')
+  echo "Device ID: $DEVICE_ID"
+
+  local LOCAL_WIFI_IP=$(adb shell ip route | awk 'NR==1{print $9}')
+  echo "Local Wifi IP: $LOCAL_WIFI_IP"
+
+  local PORT=5555
+  adb tcpip $PORT
+  adb connect $LOCAL_WIFI_IP:$PORT
+  sleep 1
+  adb devices;
+}
+
+# ADB Over USB
+# Use as: adbOverUsb
+function adbOverUsb(){
+  local DEVICE_ID=$(adb devices | awk 'NR==2{print $1; exit}')
+  local CONNECTED_OVER_WIFI=$(adb devices | grep 5555 |  awk 'NR==1{print $1}')
+  adb disconnect $CONNECTED_OVER_WIFI
+  echo "Switching to USB mode for device with ID: $DEVICE_ID"
+  adb usb $DEVICE_ID
+  sleep 1
+  adb devices;
+}
+
 # Stress test the debug apk with 100000 ui events
 # Execute at the root of your android project
-# Usage: stressTestDebugApk
-# alias stressTestApk="adb shell monkey -p `aapt dump badging ./app/build/outputs/apk/debug/app-debug.apk | grep -e 'package: name' | cut -d \' -f 2` 100000"
-
+# Use as: stressTestDebugApk
+function stressTestApk(){
+  local APP_PACKAGE_NAME=$(apkanalyzer -h manifest application-id ./app/build/outputs/apk/debug/app-debug.apk)
+  adb shell monkey -p $APP_PACKAGE_NAME 100000;
+}
 
 # Demo Mode : https://android.googlesource.com/platform/frameworks/base/+/master/packages/SystemUI/docs/demo_mode.md
 # Enable Demo Mode on your device
@@ -45,9 +155,9 @@ alias enableDemoMode="adb shell settings put global sysui_demo_allowed 1 && adb 
 # Usage: disableDemoMode
 alias disableDemoMode="adb shell am broadcast -a com.android.systemui.demo -e command exit"
 
-# Get package name from the debug apk
-# Usage: getPackageName
-# alias getPackageName="aapt dump badging ./app/build/outputs/apk/debug/app-debug.apk | grep -e 'package: name' | cut -d \' -f 2"
+# Get package name of the passed apk file
+# Usage: getPackageName app-debug.apk
+alias getPackageName="apkanalyzer -h manifest application-id $1"
 
 # Install and Grant all permissions for an apk
 # Usage: grantAllPermissionsForApk path/to/apk/Application.apk
@@ -57,16 +167,19 @@ alias grantAllPermissionsForApk="adb install -g $1"
 # Use as: apkinstall app-debug.apk
 alias apkinstall="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X install -r $1"
 
-# As an alternative to apkinstall, you can also do just ./gradlew installDebug
-# Alias for building and installing the apk to connected device
-# Run at the root of your project
-# $ buildAndInstallApk
-alias buildAndInstallApk='./gradlew uninstallAll installDebug'
-
 # Launch your debug apk on your connected device
 # Execute at the root of your android project
 # Usage: launchDebugApk
-# alias launchDebugApk="adb shell monkey -p `aapt dump badging ./app/build/outputs/apk/debug/app-debug.apk | grep -e 'package: name' | cut -d \' -f 2` 1"
+function launchDebugApk(){
+  local APP_PACKAGE_NAME=$(apkanalyzer -h manifest application-id ./app/build/outputs/apk/debug/app-debug.apk)
+  adb shell monkey -p $APP_PACKAGE_NAME 1  1>/dev/null 2>&1;
+}
+
+# As an alternative to apkinstall, you can also do just ./gradlew installDebug
+# Alias for building and installing the apk to connected device
+# Run at the root of your project
+# Use as: buildAndInstallApk
+alias buildAndInstallApk='./gradlew uninstallAll installDebug'
 
 # Single command to build+install+launch apk
 # 
@@ -77,6 +190,10 @@ alias buildAndInstallApk='./gradlew uninstallAll installDebug'
 # Execute at the root of your android project
 # Use as: buildInstallLaunchDebugApk
 alias buildInstallLaunchDebugApk="buildAndInstallApk && launchDebugApk"
+
+# Publish Android Library
+alias publishandroidlib='./gradlew clean build install bintrayUpload -Ppublish=true'
+alias publishandroidlibjavadocflag='./gradlew clean build install bintrayUpload -Ppublish=true -PjavadocFlag=true'
 
 ```
 

@@ -142,143 +142,6 @@ How to setup these aliases
 - Done, now simply call the alias to execute the command as defined.
 
 ```bash
-# ------------------ Ubuntu ---------------- #
-alias logout="gnome-session-quit"
-alias shutdown='dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 "org.freedesktop.login1.Manager.PowerOff" boolean:true'
-alias lock="gnome-screensaver-command -l"
-alias hibernate="sudo pm-hibernate"
-alias editGRUB="sudo gedit /etc/default/grub"
-alias updateGRUB="sudo update-grub"
-alias externalIP='curl ipecho.net/plain; echo'
-alias pingNetwork='ping -c 10 www.google.com'
-alias updateAllPackages='sudo apt autoclean && sudo apt autoremove && sudo apt full-upgrade'
-
-# ------------------ Finder Application ---------------- #
-# When using:
-#     - GNOME, use 'gnome-open'
-#     - Budgie, use 'nautilus'
-#     - any other if you have a different DE and finder application
-alias defaultFinderApplication="nautilus"
-
-# Open function to open the Nautilus Finder GUI from terminal by passing the path
-# Use as: open ./ 
-function open(){
-  PASSED_PATH=$1
-
-  # Validate the passed path. If it is empty or just '.'
-  # Then translate to './' for current directory
-  
-  if [ -z "$PASSED_PATH" ]; then
-    # Empty paramter, translate to './'
-    PASSED_PATH="./"
-  fi
-
-  if [[ "$PASSED_PATH" == "." ]]; then
-    # String has only '.', translate to './'
-    PASSED_PATH="./"
-  fi
-  
-  
-  if $(xdg-open $PASSED_PATH); then
-    # Default finder application was found and 
-    # the command completed successfully
-  else
-    # Default finder application was NOT found
-    # switch to using user specified finderapplication command
-      # nohup : Used to but the command in background and detach from current terminal
-    # nautilus: Finder application for Ubuntu
-    #
-    # 1>/dev/null 2>&1 : No output when executing
-    # - `1>/dev/null` redirects standard output (1) to /dev/null, which discards it.
-    # - `2>&1` redirects standard error (2) to standard output (1), 
-    #   which then discards it as well since standard output has already been redirected.
-    nohup $(defaultFinderApplication) "$PASSED_PATH" 1>/dev/null 2>&1 ;
-  fi
-}
-
-# -------------- GREP Tool Config --------- #
-
-# Enable colored output in grep and similar tools
-alias grep="grep --color=auto"
-alias fgrep="fgrep --color=auto"
-alias egrep="egrep --color=auto"
-
-# Set color as per the table
-# Black        0;30     Dark Gray     1;30
-# Red          0;31     Light Red     1;31
-# Green        0;32     Light Green   1;32
-# Brown/Orange 0;33     Yellow        1;33
-# Blue         0;34     Light Blue    1;34
-# Purple       0;35     Light Purple  1;35
-# Cyan         0;36     Light Cyan    1;36
-# Light Gray   0;37     White         1;37
-# This sets the color to blue for output of grep
-export GREP_COLOR='1;34'
-
-# ------------------ Shell ---------------- #
-# Get default/current shell name
-function currentShell(){
-  local CURRENT_SHELL_NAME=$SHELL;
-
-  if [[ "$CURRENT_SHELL_NAME" == "-"* ]]; then
-    # Returned name is of type: -bash
-    # Sanitize the result by removing "-"
-    CURRENT_SHELL_NAME=$(echo $CURRENT_SHELL_NAME | cut -d '-' -f 2);
-  fi
-
-  if [[ "$CURRENT_SHELL_NAME" == "/usr/bin/"* ]]; then
-    # Returned name is of type: /usr/bin/bash
-    # Sanitize the result by removing "/usr/bin/"
-    CURRENT_SHELL_NAME=$(echo $CURRENT_SHELL_NAME | awk -F'/' '{print $4}');
-  fi
-
-  echo $CURRENT_SHELL_NAME;  
-}
-
-# Reset/Reload your current/default shell 
-alias resetTerminal="exec $(currentShell)"
-
-# Open the default shell's rc file for defining configuration 
-alias shellConfig="code ~/.$(currentShell)rc"
-
-# ------------------ ZSH ------------------ #
-alias ohmyzsh="code  ~/.oh-my-zsh"
-
-# Enable syntax highlighting in zsh
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# ------------------ Budgie DE ---------------- #
-alias resetBudgiePanelConfig="budgie-panel --reset --replace &!"
-alias restartBudgie="nohup budgie-panel --replace&"
-
-# ------------------ SSH ------------------ #
-# More info at : https://help.github.com/articles/generating-ssh-keys/
-export SSH_KEY_PATH="~/.ssh/rsa_id"
-alias getsshkey='cat ~/.ssh/id_rsa.pub'
-
-# ------------------ PATH ------------------ #
-
-# >>>>> Flutter
-FLUTTER_SDK="$HOME/sdks/flutter/bin"
-DART_SDK="/usr/lib/dart/bin"
-# Add all to the path
-export PATH="$PATH:$FLUTTER_SDK:$DART_SDK"
-
-# >>>>> Java
-# Java
-export JAVA_HOME="$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));')"
-
-# >>>>> Android (Linux)
-# Android SDK
-export ANDROID_HOME=$HOME/Android/Sdk
-export NDK=$ANDROID_HOME/ndk-bundle/
-# Path to Android tools (apkanalyzer, avdmanager, monkeyrunner, etc)
-export ANDROID_TOOLS="$ANDROID_HOME/tools/bin"
-# Path to Android platform tools
-export ANDROID_PLATFORM_TOOLS="$ANDROID_HOME/platform-tools"
-# Add all to the path
-export PATH=$PATH:$ANDROID_TOOLS:$ANDROID_PLATFORM_TOOLS
-
 # ------------------ Misc ------------------ #
 # Get rid of command not found
 alias cd..='cd ../'
@@ -318,8 +181,167 @@ alias psmem10='ps auxf | sort -nr -k 4 | head -10'
 alias pscpu='ps auxf | sort -nr -k 3'
 alias pscpu10='ps auxf | sort -nr -k 3 | head -10'
  
-## Get CPU info
+# Get CPU info
 alias cpuinfo='lscpu'
+
+# Download MP3 using youtube-dl utility
+alias downloadmp3='youtube-dl --extract-audio --audio-format mp3'
+
+# Get external IP
+alias externalIP='curl ipecho.net/plain; echo'
+
+# Ping to check network connectivity
+alias pingNetwork='ping -c 10 www.google.com'
+
+# Micro Terminal Editor
+# Install micro from: https://github.com/zyedidia/micro
+alias micro="~/micro"
+
+# -------------- GREP Tool Config --------- #
+
+# Enable colored output in grep and similar tools
+alias grep="grep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias egrep="egrep --color=auto"
+
+# Set color as per the table
+# Black        0;30     Dark Gray     1;30
+# Red          0;31     Light Red     1;31
+# Green        0;32     Light Green   1;32
+# Brown/Orange 0;33     Yellow        1;33
+# Blue         0;34     Light Blue    1;34
+# Purple       0;35     Light Purple  1;35
+# Cyan         0;36     Light Cyan    1;36
+# Light Gray   0;37     White         1;37
+# This sets the color to blue for output of grep
+export GREP_COLOR='1;34'
+
+# ------------------ Shell ---------------- #
+# Get default/current shell name
+function currentShell(){
+  local CURRENT_SHELL_NAME=$SHELL;
+
+  if [[ "$CURRENT_SHELL_NAME" == "-"* ]]; then
+    # Returned name is of type: -bash
+    # Sanitize the result by removing "-"
+    CURRENT_SHELL_NAME=$(echo $CURRENT_SHELL_NAME | cut -d '-' -f 2);
+  fi
+
+  if [[ "$CURRENT_SHELL_NAME" == "/usr/bin/"* ]]; then
+    # Returned name is of type: /usr/bin/bash
+    # Sanitize the result by removing "/usr/bin/"
+    CURRENT_SHELL_NAME=$(echo $CURRENT_SHELL_NAME | awk -F'/' '{print $4}');
+  fi
+
+  if [[ "$CURRENT_SHELL_NAME" == "/bin/"* ]]; then
+    # Returned name is of type: /bin/bash
+    # Sanitize the result by removing "/bin/"
+    CURRENT_SHELL_NAME=$(echo $CURRENT_SHELL_NAME | awk -F'/' '{print $3}');
+  fi
+
+  echo $CURRENT_SHELL_NAME;  
+}
+
+# Reset/Reload your current/default shell 
+alias resetTerminal="exec $(currentShell)"
+
+# Open the default shell's rc file for defining configuration 
+alias shellConfig="code ~/.$(currentShell)rc"
+
+# ------------------ SSH ------------------ #
+# More info at : https://help.github.com/articles/generating-ssh-keys/
+export SSH_KEY_PATH="~/.ssh/rsa_id"
+alias getsshkey='cat ~/.ssh/id_rsa.pub'
+
+
+# ------------------ PATH ------------------ #PATH="$PATH:$FLUTTER_SDK:$DART_SDK"
+
+# Setup JAVA_HOME
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+    # Linux
+    export JAVA_HOME="$(jrunscript -e 'java.lang.System.out.println(java.lang.System.getProperty("java.home"));')"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+    # Mac OSX
+    export JAVA_HOME="/Library/Java/Home"
+fi
+
+# Setup OS specific aliases/Paths
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  # Linux
+  # ------------------ Ubuntu ---------------- #
+  alias logout="gnome-session-quit"
+  alias shutdown='dbus-send --system --print-reply --dest=org.freedesktop.login1 /org/freedesktop/login1 "org.freedesktop.login1.Manager.PowerOff" boolean:true'
+  alias lock="gnome-screensaver-command -l"
+  alias hibernate="sudo pm-hibernate"
+  alias editGRUB="sudo gedit /etc/default/grub"
+  alias updateGRUB="sudo update-grub"
+  alias updateAllPackages='sudo apt autoclean && sudo apt autoremove && sudo apt full-upgrade'
+
+  # Open command equivalent When using linux:
+  #     - GNOME, use 'gnome-open'
+  #     - Budgie, use 'nautilus'
+  #     - any other if you have a different DE and finder application
+  alias defaultFinderApplication="nautilus"
+
+  # Open function to open the Nautilus Finder GUI from terminal by passing the path
+  # Use as: open ./ 
+  function open(){
+    PASSED_PATH=$1
+
+    # Validate the passed path. If it is empty or just '.'
+    # Then translate to './' for current directory
+    
+    if [ -z "$PASSED_PATH" ]; then
+      # Empty paramter, translate to './'
+      PASSED_PATH="./"
+    fi
+
+    if [[ "$PASSED_PATH" == "." ]]; then
+      # String has only '.', translate to './'
+      PASSED_PATH="./"
+    fi
+    
+    if $(xdg-open $PASSED_PATH); then
+      # Default finder application was found and 
+      # the command completed successfully
+    else
+      # Default finder application was NOT found
+      # switch to using user specified finderapplication command
+        # nohup : Used to but the command in background and detach from current terminal
+      # nautilus: Finder application for Ubuntu
+      #
+      # 1>/dev/null 2>&1 : No output when executing
+      # - `1>/dev/null` redirects standard output (1) to /dev/null, which discards it.
+      # - `2>&1` redirects standard error (2) to standard output (1), 
+      #   which then discards it as well since standard output has already been redirected.
+      nohup $(defaultFinderApplication) "$PASSED_PATH" 1>/dev/null 2>&1 ;
+    fi
+  }
+
+  # ------------------ Budgie DE ---------------- #
+  alias resetBudgiePanelConfig="budgie-panel --reset --replace &!"
+  alias restartBudgie="nohup budgie-panel --replace&"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  # ------------------ Mac OSX ------------------ #
+
+  # Setup PATH variable
+  SBIN_PATH="/usr/local/sbin"
+  RBENV_PATH="$HOME/.rbenv/bin"
+  export PATH="$SBIN_PATH:$RBENV_PATH:$PATH"
+
+  # Brew update and cleanup
+  alias updateAllPackages='brew update && brew upgrade && brew cleanup && brew doctor'
+fi
+
+# ---------------Enable syntax highlighting in zsh------------------#
+# 
+# To set it up, make sure the script exist in home directory
+#  cd ~ && git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
+# 
+# NOTE: The source command must be at the end of ~/.zshrc.
+# 
+# Read More: https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/INSTALL.md
+source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ```
 ### Scripts

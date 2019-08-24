@@ -1,4 +1,4 @@
-# git
+# Git
 
 1. Discard all unstaged files from git
     ```bash
@@ -144,9 +144,7 @@ How to setup these aliases
 - Done, now simply call the alias to execute the command as defined.
 
 ```bash
-
 # ------------------ Git ------------------- #
-# git aliases
 alias gitLog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches"
 alias gitAmmend='git commit --amend -m '
 alias gitResetMerge='git reset --merge ORIG_HEAD'
@@ -157,8 +155,7 @@ alias gitUnstageSelective='git reset -p'
 alias gitUnstageAll='git reset'
 alias gitForgetChanges='git update-index --assume-unchanged'
 alias gitDeleteAllLocalMergedBranches='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
-alias gitInitForAndroid='git init && cp ~/sdks/android_sdk/.gitignore ./.gitignore'
-alias gitZip='function _gitZip(){ result=${PWD##*/};echo "Zipping git repository to: $result.zip"; git archive -o $result.zip HEAD; };_gitZip'
+alias gitInitForAndroid="git init && cp $ANDROID_HOME/.gitignore ./.gitignore"
 
 # >> Update From Upstream Cmd 
 # [Breakdown of cmd]
@@ -170,13 +167,21 @@ alias gitZip='function _gitZip(){ result=${PWD##*/};echo "Zipping git repository
 alias gitSyncDevelopFromUpstream='git checkout develop && git fetch upstream develop && git pull upstream develop && git push origin develop && git checkout --'
 
 # Bash Function to squash commits. This acts as an alias.
-# Call as: gitSquashCommits 3
 # Read more: https://stackoverflow.com/a/7131683/2745762
-gitSquashCommits() { git reset --soft HEAD~"$1"; }
+function gitSquashCommits() { git reset --soft HEAD~"$1"; }
+
+# Bash Function to create a zip of the git traked directory, ignoring everything that is gitignored. 
+# This acts as an alias.
+function gitZip(){ 
+  result=${PWD##*/};
+  echo "Zipping git repository to: $result.zip"; 
+  git archive -o $result.zip HEAD; 
+}
 
 # Reset the last git squash command
 # Read more: https://stackoverflow.com/a/2531803/2745762
-alias resetLastGitSquash="git reset 'HEAD@{1}'"
+# This acts as an alias.
+function resetLastGitSquash() { git reset "HEAD@{1}"; }
 ```
 
 License

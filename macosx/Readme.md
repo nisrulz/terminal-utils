@@ -75,6 +75,12 @@ function currentShell(){
     CURRENT_SHELL_NAME=$(echo $CURRENT_SHELL_NAME | awk -F'/' '{print $4}');
   fi
 
+  if [[ "$CURRENT_SHELL_NAME" == "/bin/"* ]]; then
+    # Returned name is of type: /bin/bash
+    # Sanitize the result by removing "/bin/"
+    CURRENT_SHELL_NAME=$(echo $CURRENT_SHELL_NAME | awk -F'/' '{print $3}');
+  fi
+
   echo $CURRENT_SHELL_NAME;  
 }
 
@@ -83,6 +89,7 @@ alias resetTerminal="exec $(currentShell)"
 
 # Open the default shell's rc file for defining configuration 
 alias shellConfig="code ~/.$(currentShell)rc"
+
 ```
 License
 =======
