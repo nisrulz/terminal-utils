@@ -60,7 +60,23 @@ How to setup these aliases
 ```bash
 # ------------------ Shell ---------------- #
 # Get default/current shell name
-alias currentShell="echo $0 | cut -d '-' -f 2"
+function currentShell(){
+  local CURRENT_SHELL_NAME=$SHELL;
+
+  if [[ "$CURRENT_SHELL_NAME" == "-"* ]]; then
+    # Returned name is of type: -bash
+    # Sanitize the result by removing "-"
+    CURRENT_SHELL_NAME=$(echo $CURRENT_SHELL_NAME | cut -d '-' -f 2);
+  fi
+
+  if [[ "$CURRENT_SHELL_NAME" == "/usr/bin/"* ]]; then
+    # Returned name is of type: /usr/bin/bash
+    # Sanitize the result by removing "/usr/bin/"
+    CURRENT_SHELL_NAME=$(echo $CURRENT_SHELL_NAME | awk -F'/' '{print $4}');
+  fi
+
+  echo $CURRENT_SHELL_NAME;  
+}
 
 # Reset/Reload your current/default shell 
 alias resetTerminal="exec $(currentShell)"
