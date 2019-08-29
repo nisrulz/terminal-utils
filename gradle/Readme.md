@@ -13,6 +13,13 @@ How to setup these aliases
 # ------------------ Gradle ---------------- #
 alias gradleCacheSize='du -sh ~/.gradle'
 alias gradleCleanCache='find ~/.gradle -type f -atime +30 -delete && find ~/.gradle -type d -mindepth 1 -empty -delete'
+
+# Upgrade the gradle wrapper to new version
+# Use as: upgradeGradleWrapper VERSION_NAME
+#      - where VERSION_NAME is like 5.6.1
+function upgradeGradleWrapper(){
+  ./gradlew wrapper --gradle-version $1 --distribution-type all;
+}
 ```
 
 License
