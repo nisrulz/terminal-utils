@@ -102,6 +102,21 @@
 
     [[Read more](https://en.wikipedia.org/wiki/Unix_shell)]
 
+1. Kill all processes that match the name
+    ```bash
+    # Drop this in your ~/.bashrc or ~/.zshrc file
+    # Use as: killAllProcesses chrome
+    #      where 'chrome' is the name of the process
+    #
+    # To get the name of the process run: ps -A
+    function killAllProcesses(){
+        for f in $(pgrep "$1"); 
+        do 
+            echo "💀 Killing PID $f"
+            kill -9 $f; 
+        done
+    }
+    ```
 1. Check the name of your default os
     ```bash
     echo $OSTYPE
