@@ -94,8 +94,7 @@ Contributions are always welcome.
 Feedbacks/Issues can be filed under Github issues.
 
 
-> If you found this list helpful or you learned something new today and want to thank me, consider buying me a cup of :coffee:
-> + [PayPal](https://www.paypal.me/nisrulz/5usd)
+If you appreciate my work, consider [buying me](https://www.paypal.me/nisrulz/5usd) a cup of :coffee: to keep me recharged :metal: [[PayPal](https://www.paypal.me/nisrulz/5usd)]
 
 License
 =======
