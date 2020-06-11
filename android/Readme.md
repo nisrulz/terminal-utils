@@ -73,10 +73,10 @@
     ./adb install -g MyAwesomeApp.apk
     ```
 
-
 ### Aliases
 
 How to setup these aliases
+
 - Copy-Paste these alias inside your `.bashrc` or `.zshrc`
 - Save.
 - Goto terminal and execute `source ~/.bashrc` or `source ~/.zshrc`.
@@ -89,26 +89,38 @@ if [[ "$OSTYPE" == "linux-gnu" ]]; then
     export ANDROID_HOME=$HOME/Android/Sdk
 elif [[ "$OSTYPE" == "darwin"* ]]; then
     # Mac OSX
-    export ANDROID_HOME=$HOME/sdks/android_sdk
+    export ANDROID_HOME=$HOME/Library/Android/sdk
 fi
 
-export NDK=$ANDROID_HOME/ndk-bundle/
-# Path to Android tools (apkanalyzer, avdmanager, monkeyrunner, etc)
-export ANDROID_TOOLS="$ANDROID_HOME/tools/bin"
-# Path to Android platform tools
+# Path to NDK
+export ANDROID_NDK_HOME=$ANDROID_HOME/ndk
+
+# Path to Android platform tools (adb, fastboot, etc)
 export ANDROID_PLATFORM_TOOLS="$ANDROID_HOME/platform-tools"
+
+# Path to Android tools (monitor, mksdcard, emulator-check, emulator, etc)
+export ANDROID_TOOLS_1="$ANDROID_HOME/tools"
+
+# Path to Android tools (apkanalyzer, avdmanager, monkeyrunner, lint, sdkmanager etc)
+export ANDROID_TOOLS_2="$ANDROID_HOME/tools/bin"
+
+# Path to Android tools (aapt, apksigner, zipalign, etc)
+export ANDROID_TOOLS_3="$ANDROID_HOME/build-tools/29.0.3/"
+
 # Add all to the path
-export PATH="$ANDROID_TOOLS:$ANDROID_PLATFORM_TOOLS:$PATH"
+export PATH="$PATH:$ANDROID_PLATFORM_TOOLS:$ANDROID_TOOLS:$ANDROID_TOOLS_2:$ANDROID_TOOLS_3"
 
 # ------------------ Android --------------- #
-alias aapt2="$ANDROID_HOME/build-tools/29.0.1/aapt2"
-alias aapt="$ANDROID_HOME/build-tools/29.0.1/aapt"
 
 # Misc ADB aliases
 alias screenshot="adb exec-out screencap -p > screen-$(nowdate).png"
 alias startintent="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X shell am start $1"
 alias rmapp="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X uninstall $1"
 alias clearapp="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X shell pm clear $1"
+
+# Drop this in your ~/.bashrc or ~/.zshrc file
+# Use as: deleteAllBuildDirs
+alias deleteAllBuildDirs='find . -type d -name "build" | while read f; do echo "🔥Deleting: $f" && rm -rf "$f"; done'
 
 # ADB Over Wifi
 # Use as: adbOverWifi
