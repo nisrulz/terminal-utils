@@ -348,6 +348,16 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   alias updateAllPackages='brew update && brew upgrade && brew cleanup && brew doctor'
 fi
 
+# Use as: createBashScript my_script
+function createBashScript(){
+    local SCRIPT_NAME="$1".sh
+    touch $SCRIPT_NAME
+    echo "#!/usr/bin/env bash" > $SCRIPT_NAME
+    echo 'echo Hello World' >> $SCRIPT_NAME
+    chmod +x $SCRIPT_NAME
+    code $SCRIPT_NAME
+}
+
 # ---------------Enable syntax highlighting in zsh------------------#
 # 
 # To set it up, make sure the script exist in home directory
