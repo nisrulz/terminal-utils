@@ -14,6 +14,17 @@ How to setup these aliases
 alias gradleCacheSize='du -sh ~/.gradle'
 alias gradleCleanCache='find ~/.gradle -type f -atime +30 -delete && find ~/.gradle -type d -mindepth 1 -empty -delete'
 
+# Use as: releaseGradleCacheLocks
+alias releaseGradleCacheLocks='find ~/.gradle -type f -name "*.lock" | while read f; do rm "$f"; done'
+
+# Use as: nukeGradleCache
+function nukeGradleCache(){
+   GRADLE_WRAPPERS=$(ls ~/.gradle/wrapper/dists/ | while read f; do echo ${f//[^0-9.]/}; done;)
+   for f in $GRADLE_WRAPPERS;do
+      rm -rf $f
+   done;
+}
+
 # Upgrade the gradle wrapper to new version
 # Use as: upgradeGradleWrapper VERSION_NAME
 #      - where VERSION_NAME is like 5.6.1
