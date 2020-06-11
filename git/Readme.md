@@ -138,26 +138,55 @@
 ### Aliases
 
 How to setup these aliases
+
 - Copy-Paste these alias inside your `.bashrc` or `.zshrc`
 - Save.
 - Goto terminal and execute `source ~/.bashrc` or `source ~/.zshrc`.
 - Done, now simply call the alias to execute the command as defined.
 
 ```bash
-# ------------------ Git ------------------- #
+#############################################################
+# Git aliases
+#############################################################
+
 alias gitLog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset%n' --abbrev-commit --date=relative --branches"
-alias gitAmmend='git commit --amend -m '
+alias gitAmmend='git commit --amend -m'
 alias gitResetMerge='git reset --merge ORIG_HEAD'
 alias gitDeleteLastCommit='git reset --hard HEAD~1'
 alias gitMergeToMaster='git push && git checkout master && git merge develop && git push && git checkout develop'
-alias gitAddSelective='git add -p'
-alias gitUnstageSelective='git reset -p'
-alias gitUnstageAll='git reset'
-alias gitForgetChanges='git update-index --assume-unchanged'
 alias gitDeleteAllLocalMergedBranches='git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d'
 alias gitInitForAndroid="git init && cp $ANDROID_HOME/.gitignore ./.gitignore"
 
-# >> Update From Upstream Cmd 
+# Get the history of specific file across file renames
+alias gitLogOfFile="git log --follow -p --stat --"
+
+# Get the diff without leading +/- 
+alias gitDiffClean="git diff --color-words"
+
+# Discard all local unstaged changes
+alias gitDiscardUnstagedChanges="git checkout -- ."
+
+# Unstage everything - retain changes
+alias gitUnstagedChanges="git reset"
+
+# Stage selective
+alias gitAddSelective='git add -p'
+
+# Unstage selective - retain changes
+alias gitUnstageSelective='git reset -p'
+
+# Discard all local changes to all files permanently
+alias gitDiscardAllChanges="git reset --hard"
+
+# Create a git diff patch file
+# Use as: gitCreatePatch patch_name
+alias gitCreatePatchFromDiff="git diff > $1.patch"
+
+# Apply the patch to repository
+# Use as: gitApplyPatch patch_name.patch
+alias gitApplyPatch="git apply $1"
+
+# >> Update From Upstream Cmd
 # [Breakdown of cmd]
 # git checkout develop = Switch to local develop branch
 # git fetch upstream = Fetch the latest repo info from upstream i.e tags, branches, etc
@@ -166,22 +195,47 @@ alias gitInitForAndroid="git init && cp $ANDROID_HOME/.gitignore ./.gitignore"
 # git checkout - = Switch back to last branch
 alias gitSyncDevelopFromUpstream='git checkout develop && git fetch upstream develop && git pull upstream develop && git push origin develop && git checkout --'
 
-# Bash Function to squash commits. This acts as an alias.
+# Bash Function to squash commits
 # Read more: https://stackoverflow.com/a/7131683/2745762
 function gitSquashCommits() { git reset --soft HEAD~"$1"; }
 
-# Bash Function to create a zip of the git traked directory, ignoring everything that is gitignored. 
+# Bash Function to undo last squash commit
+function gitResetLastSquash() { git reset "HEAD@{1}"; }
+
+# Bash Function to create a zip of the git traked directory, ignoring everything that is gitignored.
 # This acts as an alias.
-function gitZip(){ 
-  result=${PWD##*/};
-  echo "Zipping git repository to: $result.zip"; 
-  git archive -o $result.zip HEAD; 
+function gitZip(){
+    result=${PWD##*/};
+    echo "Zipping git repository to: $result.zip";
+    git archive -o $result.zip HEAD;
 }
 
 # Reset the last git squash command
 # Read more: https://stackoverflow.com/a/2531803/2745762
 # This acts as an alias.
 function resetLastGitSquash() { git reset "HEAD@{1}"; }
+
+# Drop these in your ~/.bashrc or ~/.zshrc file
+
+# Find out how many commits ahead or behind your current branch is from another branch
+# Use as: gitNumberOfCommitsCurrentBranchIsFrom develop
+function gitNumberOfCommitsCurrentBranchIsFrom(){ 
+  local CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+  local STATUS=$(git rev-list --left-right --count  "$1"..."$CURRENT_BRANCH" | awk '{print ""$1","$2""}')
+  local BEHIND=$(echo "$STATUS" | awk '{split($0,a,","); print a[1]}')
+  local AHEAD=$(echo "$STATUS" | awk '{split($0,a,","); print a[2]}')
+  echo ""
+  echo "  $CURRENT_BRANCH <> $1"
+  echo "    - Ahead by $AHEAD"
+  echo "    - Behind by $BEHIND"
+}
+
+# Create a new git repo with one README commit and CD into it
+function gitNewRepoWithReadme() { mkdir $1; cd $1; git init; touch README; git add README; git commit -mFirst-commit;}
+
+# Stop tracking a file in local
+function gitStopTracking() { git update-index --assume-unchanged "$1" }
+
 ```
 
 License
