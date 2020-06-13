@@ -179,6 +179,14 @@ alias grantAllPermissionsForApk="adb install -g $1"
 # Use as: apkinstall app-debug.apk
 alias apkinstall="adb devices | tail -n +2 | cut -sf 1 | xargs -I X adb -s X install -r $1"
 
+# Stress test the debug apk with 100000 ui events
+# Execute at the root of your android project
+# Use as: stressTestDebugApk
+function stressTestApk() {
+    local APP_PACKAGE_NAME=$(getPackageName ./app/build/outputs/apk/debug/app-debug.apk)
+    adb shell monkey -p $APP_PACKAGE_NAME 100000
+}
+
 # Launch your debug apk on your connected device
 # Execute at the root of your android project
 # Usage: launchDebugApk
@@ -204,8 +212,20 @@ alias buildAndInstallApk='./gradlew uninstallAll installDebug'
 alias buildInstallLaunchDebugApk="buildAndInstallApk && launchDebugApk"
 
 # Publish Android Library
-alias publishandroidlib='./gradlew clean build install bintrayUpload -Ppublish=true'
-alias publishandroidlibjavadocflag='./gradlew clean build install bintrayUpload -Ppublish=true -PjavadocFlag=true'
+function publishAndroidLibModule() {
+    local MODULE_NAME="$1"
+    ./gradlew clean build $MODULE_NAME:install $MODULE_NAME:bintrayUpload -Ppublish=true
+}
+
+function publishAndroidLibModuleWithJavadocFlag() {
+    local MODULE_NAME="$1"
+    ./gradlew clean build $MODULE_NAME:install $MODULE_NAME:bintrayUpload -Ppublish=true -PjavadocFlag=true
+}
+
+# Check if the apk is signed properly
+function checkIfApkIsSigned() {
+    keytool -printcert -jarfile "$1" | grep CN= | awk -F ': CN=' '{print $1,"=",$2}'
+}
 
 ```
 
